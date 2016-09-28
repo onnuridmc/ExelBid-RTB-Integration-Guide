@@ -39,7 +39,7 @@ ExelBid RTB Integration Guide
   * [7. Bid Request/Response Samples](#7-bid-requestresponse-samples)
     * [7.1 Bid Requests](#71-bid-requests)
       * [7.1.1 Example 1 – Image Banner Creative](#711-example-1--image-banner-creative)
-      * [7.1.2 Example 2 – Native](#712-example-2--native)
+      * [7.1.2 Example 2 – Native Creative](#712-example-2--native-creative)
     * [7.2 Bid Responses](#72-bid-responses)
       * [7.2.1 Example 1 – Image Banner Creative Response](#721-example-1--image-banner-creative-response)
       * [7.2.2 Example 1 – Ad Served on Win Notice](#722-example-1--ad-served-on-win-notice)
@@ -174,16 +174,16 @@ This object should be included if the ad supported content is a non-browser appl
 
  Name       | Type         | Required, Default | Description                                               
 :-----------|:-------------|:-------------|:----------------------------------------------------------
- id         | string       | Required         | ExelBid와 연결된 앱ID.                                    
+ id         | string       | Required         | Exchange-specific app ID.                                  
  name       | string       | Required         | App name.                                          
- bundle     | string       | Required         | Android 패키지명, IOS에서는 패키지명 혹은 어플리케이션 ID
- domain     | string       |              | 어플리케이션 도메인.                                      
- storeurl   | string       |              | 앱스토어 URL                                              
- cat        | string array |              | 전체 IAB 카테고리 리스트                                  
- sectioncat | string array |              | 현재 섹션의 IAB 카테고리 리스트                           
- ver        | integer      |              | 어플리케이션 버전                                         
- paid       | integer      |              | 0 = 무료, 1 = 유료                                        
- publisher  | object       | Required         | publisher 상세 정보                                       
+ bundle     | string       | Required         | Application bundle or package name.
+ domain     | string       |              | Domain of the app.                                      
+ storeurl   | string       |              | App store URL for an installed app.
+ cat        | string array |              | Array of IAB content categories of the site. Refer to OpenRTB List 5.1.                                  
+ sectioncat | string array |              |Array of IAB content categories that describe the current page or view of the site. Refer to OpenRTB List 5.1.                           
+ ver        | integer      |              | Application version.                                         
+ paid       | integer      |              | 0 = app is free, 1 = the app is a paid version.                                        
+ publisher  | object       | Required         | Details about the Publisher (Section 3.2.8) of the app.                                       
 
 ##### 3.2.7 Object: Publisher
 
@@ -218,7 +218,10 @@ This object describes the publisher of the media in which the ad will be display
 
 ##### 3.2.9 Object: Geo
 
-Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 적용 될 수 있습니다.
+This object encapsulates various methods for specifying a geographic location. When subordinate to a
+Device object, it indicates the location of the device which can also be interpreted as the user’s current
+location. When subordinate to a User object, it indicates the location of the user’s home base (i.e., not
+necessarily their current location).
 
  Name    | Type    | Required, Default | Description                                      
 :--------|:--------|:-------------|:-------------------------------------------------
@@ -345,7 +348,7 @@ ExelBid Native is based on OpenRTB Native Ads Specification 1.0. With few except
 
 #### 5.1 Native markup Request Object
 
-입찰 요약 규격(상세 정보는 OpenRTB-Native-Ads-Specification 1.0 참조)
+Bid Request Specification. Refer to OpenRTB-Native-Ads-Specification 1.0 for more detais.
 
 <table>
 <tr>
@@ -730,7 +733,7 @@ Please refer to OpenRTB 2.3 Native Ads Specification for details
 }
 ```
 
-##### 7.1.2 Example 2 – Native
+##### 7.1.2 Example 2 – Native Creative
 
 ```json
 {
