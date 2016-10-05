@@ -490,8 +490,9 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
 
 #### 5.2 입찰 응답
 
-입찰 응답 규격(상세 정보는 OpenRTB-Native-Ads-Specification 1.0 참조)
-Exelbid에서는 Native 응답은 bid->ext Object에 native Object 포함하는 형식입니다.(7.2.3 Example 2 – 네이티브 광고 응답 참조)
+입찰 응답 규격(상세 정보는 OpenRTB-Native-Ads-Specification 1.0 참조)<br>
+Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는 ext object 아래에 포함합니다.(7.2.3 Example 2 – 네이티브 광고 응답 참조)
+
 <table>
 <tr>
   <th>Field</th>
