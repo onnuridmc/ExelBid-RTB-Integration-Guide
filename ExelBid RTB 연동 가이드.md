@@ -491,7 +491,7 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
 #### 5.2 입찰 응답
 
 입찰 응답 규격(상세 정보는 OpenRTB-Native-Ads-Specification 1.0 참조)
-
+Exelbid에서는 Native 응답은 bid->ext Object에 native Object 포함하는 형식입니다.(7.2.3 Example 2 – 네이티브 광고 응답 참조)
 <table>
 <tr>
   <th>Field</th>
@@ -862,7 +862,7 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
 
 ##### 7.2.2 Example 1 – Ad Served on Win Notice
 
-##### 7.2.3 Example 2 – Native Markup Returned Inline
+##### 7.2.3 Example 2 – 네이티브 광고 응답
 
 ```json
 {
@@ -886,56 +886,53 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
           "h": 0,
           "w": 0,
           "ext": {
-            "crtype": "native",
-            "admnative": {
-              "native": {
-                "ver": "1.0.0.2",
-                "link": {
-                  "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
-                },
-                "imptrackers": [
-                  "http://kr-09.cross-target.com/exelbid/nurl?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}"
-                ],
-                "assets": [
-                  {
-                    "id": 16,
-                    "data": {
-                      "value": "지금설치2"
-                    },
-                    "link": {
-                      "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
-                    }
+            "native": {
+              "ver": "1.0.0.2",
+              "link": {
+                "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
+              },
+              "imptrackers": [
+                "http://kr-09.cross-target.com/exelbid/nurl?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}"
+              ],
+              "assets": [
+                {
+                  "id": 16,
+                  "data": {
+                    "value": "지금설치2"
                   },
-                  {
-                    "id": 6,
-                    "data": {
-                      "value": "특급호텔부터 유명 리조트까지 오늘 남은 객실을 최대 80%할인된 가격으로"
-                    }
-                  },
-                  {
-                    "id": 2,
-                    "img": {
-                      "url": "http://xxx.com/banner/201606/f5c17b5a78a974229a29e761517ed120.png",
-                      "w": 80,
-                      "h": 80
-                    }
-                  },
-                  {
-                    "id": 4,
-                    "img": {
-                      "url": "http://xxx.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
-                      "w": 1200,
-                      "h": 627
-                    }
-                  },
-                  {
-                    "id": 1,
-                    "title": {
-                      "text": "국내 최저가 호텔타임"
-                    }
+                  "link": {
+                    "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
                   }
-                ]
-              }
+                },
+                {
+                  "id": 6,
+                  "data": {
+                    "value": "특급호텔부터 유명 리조트까지 오늘 남은 객실을 최대 80%할인된 가격으로"
+                  }
+                },
+                {
+                  "id": 2,
+                  "img": {
+                    "url": "http://xxx.com/banner/201606/f5c17b5a78a974229a29e761517ed120.png",
+                    "w": 80,
+                    "h": 80
+                  }
+                },
+                {
+                  "id": 4,
+                  "img": {
+                    "url": "http://xxx.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
+                    "w": 1200,
+                    "h": 627
+                  }
+                },
+                {
+                  "id": 1,
+                  "title": {
+                    "text": "국내 최저가 호텔타임"
+                  }
+                }
+              ]
             }
           }
         }
