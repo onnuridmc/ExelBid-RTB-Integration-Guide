@@ -49,7 +49,8 @@ ExelBid RTB 연동 가이드
 
 #### 1.1 ExelBid RTB?
 
-ExelBid(Excellent Bid)는 광고 구매자(DSP)와 퍼블리션 인벤토리의 판매자(SSP) 사이에서 OpenRTB 스펙에 기반한 ExelBid 스펙에 따른 광고 경매 시스템입니다.
+ExelBid(Excellent Bid)는 광고 구매자(DSP)와 퍼블리셔 인벤토리 판매자(SSP) 사이에서 OpenRTB  스펙을 기반으로 새롭게 설계된 ExelBid 스펙 베이스의 광고 경매 시스템입니다.
+
 
 ***OpenRTB Specification version 2.3, OpenRTB-Native-Ads-Specification 1.0*** 을 기반으로 합니다. 다만, 해당 Object를 완전히 지원하지 않으며, 현 규격에 정의된 범위에 한정합니다.
 
