@@ -876,6 +876,7 @@ Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는
           "id": "57c5468e0c5fb71f81bf6967",
           "impid": "1",
           "price": 0.10000000149011612,
+          "nurl": "http://kr-09.cross-target.com/exelbid/nurl?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}",
           "adomain": [
             "onnuridmc.com"
           ],
@@ -894,7 +895,7 @@ Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는
                 "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
               },
               "imptrackers": [
-                "http://kr-09.cross-target.com/exelbid/nurl?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}"
+                "http://kr-09.cross-target.com/exelbid/imptracker?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}"
               ],
               "assets": [
                 {
