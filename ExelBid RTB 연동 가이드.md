@@ -492,7 +492,7 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
 #### 5.2 입찰 응답
 
 입찰 응답 규격(상세 정보는 OpenRTB-Native-Ads-Specification 1.0 참조)<br>
-Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는 ext object 아래에 포함합니다.(7.2.3 Example 2 – 네이티브 광고 응답 참조)
+Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으로 adm 필드 안에 serialized string 으로 포함하거나, 또는 bid->ext->native 형식으로 native object는 ext object 아래에 포함합니다.(7.2.3 Example 2 – 네이티브 광고 응답 참조)
 
 <table>
 <tr>
@@ -601,17 +601,38 @@ Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는
   <td></td>
   <td></td>
 </tr>
+
 <tr>
-  <td>link</td>
-  <td>object; required</td>
+  <td rowspan="4">link</td>
+  <td rowspan="4">object; required</td>
+  <td>url</td>
+  <td>string; required</td>
   <td></td>
   <td></td>
+</tr>
+<tr>
+  <td>clicktrackers[]</td>
+  <td>array of strings; required</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><strike>fallback</strike></td>
+  <td><strike>string; optional</strike></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>ext</td>
+  <td>object; optional</td>
   <td></td>
   <td></td>
 </tr>
 <tr>
   <td>imptrackers[]</td>
   <td>array of strings;optional</td>
+  <td></td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -624,10 +645,14 @@ Exelbid에서는 Native 응답은 bid->ext->native 형식으로 native object는
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>ext</td>
   <td>object; optional</td>
+  <td></td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>

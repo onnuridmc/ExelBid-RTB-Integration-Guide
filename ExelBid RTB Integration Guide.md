@@ -492,7 +492,7 @@ Bid Request Specification. Refer to OpenRTB-Native-Ads-Specification 1.0 for mor
 #### 5.2 Native markup Response Object
 
 Please refer to OpenRTB 2.3 Native Ads Specification for details<br>
-ExelBid's Native response will be bid->ext->native Object. Native Object is under ext Object. (7.2.3 Example 2 - Please refer to native ad response)
+At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized string in adm field or 2. Native object goes under ext object - bid -> ext -> native (refer to 7.2.3 Example 2 - Native Ad Response)
 
 <table>
 <tr>
@@ -602,16 +602,36 @@ ExelBid's Native response will be bid->ext->native Object. Native Object is unde
   <td></td>
 </tr>
 <tr>
-  <td>link</td>
-  <td>object; required</td>
+  <td rowspan="4">link</td>
+  <td rowspan="4">object; required</td>
+  <td>url</td>
+  <td>string; required</td>
   <td></td>
   <td></td>
+</tr>
+<tr>
+  <td>clicktrackers[]</td>
+  <td>array of strings; required</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><strike>fallback</strike></td>
+  <td><strike>string; optional</strike></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>ext</td>
+  <td>object; optional</td>
   <td></td>
   <td></td>
 </tr>
 <tr>
   <td>imptrackers[]</td>
   <td>array of strings;optional</td>
+  <td></td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -624,10 +644,14 @@ ExelBid's Native response will be bid->ext->native Object. Native Object is unde
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>ext</td>
   <td>object; optional</td>
+  <td></td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
