@@ -628,30 +628,30 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
   <td></td>
 </tr>
 <tr>
+  <td></td>
+  <td></td>
   <td>imptrackers[]</td>
   <td>array of strings;optional</td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
 </tr>
 <tr>
+  <td></td>
+  <td></td>
   <td><strike>jstracker</strike></td>
   <td><strike>string; optional</strike></td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
 </tr>
 <tr>
+  <td></td>
+  <td></td>
   <td>ext</td>
   <td>object; optional</td>
-  <td></td>
-  <td></td>
   <td></td>
   <td></td>
   <td></td>

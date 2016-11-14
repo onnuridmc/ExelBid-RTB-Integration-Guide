@@ -629,30 +629,30 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
   <td></td>
 </tr>
 <tr>
+<td></td>
+<td></td>
   <td>imptrackers[]</td>
   <td>array of strings;optional</td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
 </tr>
 <tr>
+<td></td>
+<td></td>
   <td><strike>jstracker</strike></td>
   <td><strike>string; optional</strike></td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
 </tr>
 <tr>
+<td></td>
+<td></td>
   <td>ext</td>
   <td>object; optional</td>
-  <td></td>
-  <td></td>
   <td></td>
   <td></td>
   <td></td>
