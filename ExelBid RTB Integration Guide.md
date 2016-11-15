@@ -446,8 +446,8 @@ Bid Request Specification. Refer to OpenRTB-Native-Ads-Specification 1.0 for mor
   <td>integer; recommended</td>
 </tr>
 <tr>
-  <td><strike>mimes</strike></td>
-  <td><strike>array of strings; required</strike></td>
+  <td>mimes</td>
+  <td>array of strings; required</td>
 </tr>
 <tr>
   <td>ext</td>

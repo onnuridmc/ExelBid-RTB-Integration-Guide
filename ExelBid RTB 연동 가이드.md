@@ -446,8 +446,8 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
   <td>integer; recommended</td>
 </tr>
 <tr>
-  <td><strike>mimes</strike></td>
-  <td><strike>array of strings; required</strike></td>
+  <td>mimes</td>
+  <td>array of strings; required</td>
 </tr>
 <tr>
   <td>ext</td>
