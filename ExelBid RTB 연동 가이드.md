@@ -284,7 +284,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  id      | string       | 필수         | Bid Request의 ID                                                                         
  seatbid | object array | 필수         |                                                                                          
  bidid   | string       |              | 응답의 ID로 입찰자가 응답을 추적하기 위해 사용함. 입찰자에 의해 선택됩니다.              
- cur     | string       |              | ISO–4217 코드의 단위통화.                                                                
+ cur     | string       | 필수         | ISO–4217 코드의 단위통화.                                                                
  nbr     | integer      |              | IAB OpenRTB Spec 2.3 > 표 5.19 참조                                                      
  ext     |              |              | 규격 표준을 벗어나는 OpenRTB 주체가 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다
 

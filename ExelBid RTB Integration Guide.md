@@ -284,7 +284,7 @@ At least one seatbid object is required, which contains at least one bid for an 
  id      | string       | Required         | Bid Request의 ID                                                                         
  seatbid | object array | Required         |                                                                                          
  bidid   | string       |              | Bidder generated response ID to assist with logging/tracking.              
- cur     | string       |              | Bid currency using ISO-4217 alpha codes                                                               
+ cur     | string       | Required     | Bid currency using ISO-4217 alpha codes                                                               
  nbr     | integer      |              | Reasons for not bidding. Refer to OpenRTB 2.3 List 5.19.                                                      
  ext     |              |              | Extension of the OpenRTB specification. Exelbid uses ext field for Native creative response using JSON.
 
