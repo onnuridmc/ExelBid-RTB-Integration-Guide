@@ -802,7 +802,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
     "geo": {
       "country": "KOR",
       "lat": 37.495499,
-      "lon": 127.0162,
+      "lon": 127.0162
     },
     "h": 1280,
     "ifa": "df58a938-d087-491d-985f-1c42ca3ef0da",
