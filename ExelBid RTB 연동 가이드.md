@@ -44,6 +44,13 @@ ExelBid RTB 연동 가이드
       * [7.2.1 Example 1 – 이미지 광고 응답](#721-example-1--이미지-광고-응답)
       * [7.2.2 Example 1 – Ad Served on Win Notice](#722-example-1--ad-served-on-win-notice)
       * [7.2.3 Example 2 – Native Markup Returned Inline](#723-example-2--native-markup-returned-inline)
+  * [8. Extension 설명](#8-extension-설명)
+    * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
+      * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
+      * [8.1.2 Unescaped response sample](#812-unescaped-response-sample)
+      * [8.1.3 Escaped request sample](#813-escaped-request-sample)
+      * [8.1.4 Escaped response sample](#814-escaped-response-sample)
+
 
 ### 1. ExcelBid 소개
 
@@ -132,6 +139,7 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
  tagid             | string  |                 | 노출 인벤토리(해당 지면, 유닛)의 고유한 식별자               
  bidfloor          | integer | 기본값 0        | Impression의 입찰 최저가                                     
  bidfloorcur       | string  | 기본값 "USD"    | ISO–4217 알파벳 코드를 사용하여 명시되어야 합니다            
+ ext               | object  |               | click_through_url 클릭 URL ${CLICK_URL_ESC} 혹은 {CLICK_URL_UNESC}            
 
 ##### 3.2.3 Object: Banner
 
@@ -957,6 +965,134 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
               ]
             }
           }
+        }
+      ],
+      "seat": "xxx",
+      "group": 0
+    }
+  ],
+  "cur": "USD"
+}
+```
+
+### 8 Extension 설명
+#### 8.1 Click tracking for publisher
+  Exelbid 에서 퍼블리셔들이 클릭을 측정하기 위하여 Imp Object Extension (Imp.ext.click_through_url) 에 마크업을 제공한다. <br>
+  DSP는 click_through_url 을 이용하여 클릭 URL을 새로 만들어야 한다.
+  <table>
+  <tr>
+    <th>Macup</th>
+    <th>Scope</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>${CLICK_URL_ESC}</td>
+    <td>string</td>
+    <td>Escaped Click URL</td>
+  </tr>
+  <tr>
+    <td>${CLICK_URL_UNESC}</td>
+    <td>string</td>
+    <td>Unescaped Click URL</td>
+  </tr>
+  </table>
+
+##### 8.1.1 Unescaped request sample
+```json
+{
+  "imp": [
+    {
+      "bidfloor": 0.014,
+      "displaymanager": "test",
+      "displaymanagerver": "4.2.0",
+      "id": "1",
+      "instl": 0,
+      "tagid": "072df02f86984dc6b50d74b0ad42bb85",
+      "ext":{
+        "$click_through_url" : "${CLICK_URL_UNESC}"
+      }
+    }
+  ]
+}
+```
+##### 8.1.2 Unescaped response sample
+Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+```json
+{
+  "id": "57a06a911b3f68cd5cacdc46",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "57c52635e0012acf8c2a86e9",
+          "impid": "1",
+          "price": 1,
+          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adomain": [
+            "onnuridmc.com"
+          ],
+          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "cid": "177",
+          "crid": "470",
+          "cat": [
+            "IAB1"
+          ],
+          "h": 50,
+          "w": 320
+        }
+      ],
+      "seat": "xxx",
+      "group": 0
+    }
+  ],
+  "cur": "USD"
+}
+```
+
+##### 8.1.3 Escaped request sample
+```json
+{
+  "imp": [
+    {
+      "bidfloor": 0.014,
+      "displaymanager": "test",
+      "displaymanagerver": "4.2.0",
+      "id": "1",
+      "instl": 0,
+      "tagid": "072df02f86984dc6b50d74b0ad42bb85",
+      "ext":{
+        "$click_through_url" : "http://xxx.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
+      }
+    }
+  ]
+}
+```
+##### 8.1.4 Escaped response sample
+Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+```json
+{
+  "id": "57a06a911b3f68cd5cacdc46",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "57c52635e0012acf8c2a86e9",
+          "impid": "1",
+          "price": 1,
+          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://xxx.exelbid.com/test?id=100&redirect=http%3A%2F%2Fxxx.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adomain": [
+            "onnuridmc.com"
+          ],
+          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "cid": "177",
+          "crid": "470",
+          "cat": [
+            "IAB1"
+          ],
+          "h": 50,
+          "w": 320
         }
       ],
       "seat": "xxx",

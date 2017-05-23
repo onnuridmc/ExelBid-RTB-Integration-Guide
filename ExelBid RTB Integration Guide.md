@@ -214,7 +214,7 @@ This object describes the publisher of the media in which the ad will be display
  language       | string  |              | Browser language using ISO-639-1-alpha-2                           
  carrier        | string  |              | Carrier or ISP.
  connectiontype | string  |              | Network connection type. Refer to OpenRTB 2.3 List 5.18.        
- ifa            | string  | Recommended         | ID sanctioned for advertiser use in the clear.                  
+ ifa            | string  | Required         | ID sanctioned for advertiser use in the clear.                  
 
 ##### 3.2.9 Object: Geo
 
