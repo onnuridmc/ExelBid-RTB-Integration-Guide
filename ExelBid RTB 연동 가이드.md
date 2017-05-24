@@ -1018,7 +1018,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
       "instl": 0,
       "tagid": "072df02f86984dc6b50d74b0ad42bb85",
       "ext":{
-        "$click_through_url" : "${CLICK_URL_UNESC}"
+        "click_through_url" : "${CLICK_URL_UNESC}"
       }
     }
   ]
@@ -1071,7 +1071,7 @@ Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
       "instl": 0,
       "tagid": "072df02f86984dc6b50d74b0ad42bb85",
       "ext":{
-        "$click_through_url" : "http://xxx.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
+        "click_through_url" : "http://xxx.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
       }
     }
   ]
