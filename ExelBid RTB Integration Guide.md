@@ -15,6 +15,7 @@ ExelBid RTB Integration Guide
     * [3.2 Object Specifications](#32-object-specifications)
       * [3.2.1 Object: BidRequest](#321-object-bidrequest)
       * [3.2.2 Object: Imp](#322-object-imp)
+        * [3.2.2.1 Object: Ext](#3221-object-ext)
       * [3.2.3 Object: Banner](#323-object-banner)
       * [3.2.4 Object: Native](#324-object-native)
       * [3.2.5 Object: Site](#325-object-site)
@@ -44,6 +45,12 @@ ExelBid RTB Integration Guide
       * [7.2.1 Example 1 – Image Banner Creative Response](#721-example-1--image-banner-creative-response)
       * [7.2.2 Example 1 – Ad Served on Win Notice](#722-example-1--ad-served-on-win-notice)
       * [7.2.3 Example 2 – Native Markup Returned Inline](#723-example-2--native-markup-returned-inline)
+  * [8. Extension Explanation](#8-extension-explanation)
+    * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
+      * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
+      * [8.1.2 Unescaped response sample](#812-unescaped-response-sample)
+      * [8.1.3 Escaped request sample](#813-escaped-request-sample)
+      * [8.1.4 Escaped response sample](#814-escaped-response-sample)
 
 ### 1. Introduction
 
@@ -128,7 +135,16 @@ This object describes an ad placement or impression being auctioned.
  instl             | integer | Default 0        | 1 = the ad is interstitial or full screen, 0 = not interstitial.                               
  tagid             | string  |                 | Identifier for specific ad placement or ad tag that was used to initiate the auction.           
  bidfloor          | integer | Default 0        | Minimum bid for this impression expressed in CPM.                                   
- bidfloorcur       | string  | Default "USD"    | Currency specified using ISO-4217 alpha codes.          
+ bidfloorcur       | string  | Default "USD"    | Currency specified using ISO-4217 alpha codes.   
+ ext               | object  |                 | Include click_through_url. - Section 3.2.2.1 Object: Ext
+
+##### 3.2.2.1 Object: Ext
+
+  [ Refer to 8.Extension](#8-extension-extension)
+
+  Name              | Type    | Required, Default    | Description                                                  
+ :------------------|:--------|:----------------|:-------------------------------------------------------------
+  click_through_url | string  |                 | Click URL. ${CLICK_URL_ESC} or {CLICK_URL_UNESC}
 
 ##### 3.2.3 Object: Banner
 
@@ -956,6 +972,134 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
               ]
             }
           }
+        }
+      ],
+      "seat": "xxx",
+      "group": 0
+    }
+  ],
+  "cur": "USD"
+}
+```
+
+### 8 Extension Explanation
+#### 8.1 Click tracking for publisher
+  In Exelbid, publishers provide markup to Imp Object Extension (Imp.ext.click_through_url) to measure clicks. <br>
+  DSP는 click_through_url 을 이용하여 클릭 URL을 새로 만들어야 한다.
+  <table>
+  <tr>
+    <th>Macup</th>
+    <th>Scope</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>${CLICK_URL_ESC}</td>
+    <td>string</td>
+    <td>Escaped Click URL</td>
+  </tr>
+  <tr>
+    <td>${CLICK_URL_UNESC}</td>
+    <td>string</td>
+    <td>Unescaped Click URL</td>
+  </tr>
+  </table>
+
+##### 8.1.1 Unescaped request sample
+```json
+{
+  "imp": [
+    {
+      "bidfloor": 0.014,
+      "displaymanager": "test",
+      "displaymanagerver": "4.2.0",
+      "id": "1",
+      "instl": 0,
+      "tagid": "072df02f86984dc6b50d74b0ad42bb85",
+      "ext":{
+        "$click_through_url" : "${CLICK_URL_UNESC}"
+      }
+    }
+  ]
+}
+```
+##### 8.1.2 Unescaped response sample
+Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+```json
+{
+  "id": "57a06a911b3f68cd5cacdc46",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "57c52635e0012acf8c2a86e9",
+          "impid": "1",
+          "price": 1,
+          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adomain": [
+            "onnuridmc.com"
+          ],
+          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "cid": "177",
+          "crid": "470",
+          "cat": [
+            "IAB1"
+          ],
+          "h": 50,
+          "w": 320
+        }
+      ],
+      "seat": "xxx",
+      "group": 0
+    }
+  ],
+  "cur": "USD"
+}
+```
+
+##### 8.1.3 Escaped request sample
+```json
+{
+  "imp": [
+    {
+      "bidfloor": 0.014,
+      "displaymanager": "test",
+      "displaymanagerver": "4.2.0",
+      "id": "1",
+      "instl": 0,
+      "tagid": "072df02f86984dc6b50d74b0ad42bb85",
+      "ext":{
+        "$click_through_url" : "http://xxx.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
+      }
+    }
+  ]
+}
+```
+##### 8.1.4 Escaped response sample
+Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+```json
+{
+  "id": "57a06a911b3f68cd5cacdc46",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "57c52635e0012acf8c2a86e9",
+          "impid": "1",
+          "price": 1,
+          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://xxx.exelbid.com/test?id=100&redirect=http%3A%2F%2Fxxx.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adomain": [
+            "onnuridmc.com"
+          ],
+          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "cid": "177",
+          "crid": "470",
+          "cat": [
+            "IAB1"
+          ],
+          "h": 50,
+          "w": 320
         }
       ],
       "seat": "xxx",

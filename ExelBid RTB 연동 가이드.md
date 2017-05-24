@@ -15,6 +15,7 @@ ExelBid RTB 연동 가이드
     * [3.2 Object Specifications](#32-object-specifications)
       * [3.2.1 Object: BidRequest](#321-object-bidrequest)
       * [3.2.2 Object: Imp](#322-object-imp)
+        * [3.2.2.1 Object: Ext](#3221-object-ext)
       * [3.2.3 Object: Banner](#323-object-banner)
       * [3.2.4 Object: Native](#324-object-native)
       * [3.2.5 Object: Site](#325-object-site)
@@ -139,7 +140,15 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
  tagid             | string  |                 | 노출 인벤토리(해당 지면, 유닛)의 고유한 식별자               
  bidfloor          | integer | 기본값 0        | Impression의 입찰 최저가                                     
  bidfloorcur       | string  | 기본값 "USD"    | ISO–4217 알파벳 코드를 사용하여 명시되어야 합니다            
- ext               | object  |               | click_through_url 클릭 URL ${CLICK_URL_ESC} 혹은 {CLICK_URL_UNESC}            
+ ext               | object  |                 | click_through_url 포함. 3.2.2.1 Object: Ext 참조   
+
+##### 3.2.2.1 Object: Ext
+
+  [ 8. Extension 설명 참조](#8-extension-설명)
+
+  Name              | Type    | 필수, 기본값    | Description                                                  
+ :------------------|:--------|:----------------|:-------------------------------------------------------------
+  click_through_url | string  |                 | 클릭 URL ${CLICK_URL_ESC} 혹은 {CLICK_URL_UNESC}  
 
 ##### 3.2.3 Object: Banner
 
