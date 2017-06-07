@@ -26,6 +26,8 @@ ExelBid RTB Integration Guide
       * [3.2.10 Object: User](#3210-object-user)
       * [3.2.11 Object: Data](#3211-object-data)
       * [3.2.12 Object: Segment](#3212-object-segment)
+      * [3.2.13 Object: Pmp](#3213-object-pmp)
+      * [3.2.14 Object: Deal](#3214-object-deal)
   * [4. Bid Response Specification](#4-bid-response-specification)
     * [4.1 Object Model](#41-object-model)
     * [4.2 Object Specifications](#42-object-specifications)
@@ -130,6 +132,7 @@ This object describes an ad placement or impression being auctioned.
  id                | string  | Required            | A unique identifier for this impression within the context of the bid request.
  banner            | object  | Required(or native) | Either one of banner or native must is required.
  native            | object  | Required(or banner) | Either one of banner or native must is required.
+ pmp               | object  |                 | Pmp object includes this imp’s object’s PMP agreement.
  displaymanager    | string  |                 | Name of ad mediation partner, SDK technology, or player responsible for rendering ad.                                               
  displaymanagerver | string  |                 | Version of ad mediation partner, SDK technology, or player responsible for rendering ad.                                              
  instl             | integer | Default 0        | 1 = the ad is interstitial or full screen, 0 = not interstitial.                               
@@ -277,6 +280,30 @@ Segment objects are essentially key-value pairs that convey specific units of da
  id    | string |              | Unique ID of the segment.
  name  | string |              | Name of the data segment.                      
  value | string |              | String representation of the data segment value.                           
+
+##### 3.2.13 Object: Pmp
+
+Included in Imp object, and includes information necessary to use RTB protocol in Private MarketPlace or direct deal.
+
+   Name              | Type   | Required, Default | Description                       
+  :------------------|:-------|:------------|:----------------------------------
+   private_auction   | string | Default 0     | unique ID to identify data
+ deals             | object |             | deal object array that contains direct deals list for this imp
+
+
+##### 3.2.14 Object: Deal
+
+This is approved agreement between the buyer and seller, and its presence
+with the PMP indicates that this impression is available under the terms of that agreement.
+
+   Name              | Type    | required, default   | Description                                                  
+  :------------------|:--------|:----------------|:-------------------------------------------------------------
+  id                | string  | required            | A unique indenfier that used within BidRequest object to identify imp.
+  bidfloor          | integer | Default 0        | Impression’s bid floor                                     
+  bidfloorcur       | string  | Default "USD"    |Currency specified using ISO–4217 alphabet codes.
+  wseat             | string array |            | whitelist of buyer seats
+  wadomain          | string array |            |List of advertiser’s domain that is allowed to bid in this deal
+  at                | integer |                 | Optional override of the overall auction type of the bid request. Additional auction types can be defined by the exchange.                      
 
 ### 4. Bid Response Specification
 
