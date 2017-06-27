@@ -4,6 +4,7 @@ ExelBid RTB Integration Guide
   * [1. Introduction](#1-introduction)
     * [1.1 What is ExelBid RTB?](#11-what-is-exelbid-rtb)
     * [1.2 Integration Process](#12-integration-process)
+    * [1.3 ExelBid History](#13-exelbid-history)
   * [2. OpenRTB Basics](#2-openrtb-basics)
     * [2.1 Transport](#21-transport)
     * [2.2 Data Format](#22-data-format)
@@ -34,6 +35,8 @@ ExelBid RTB Integration Guide
       * [4.2.1 Object: BidResponse](#421-object-bidresponse)
       * [4.2.2 Object: SeatBid](#422-object-seatbid)
       * [4.2.3 Object: Bid](#423-object-bid)
+      * [4.2.4 Object: Ext](#424-object-ext)
+      * [4.2.5 Opt-out 설정](#425-opt-out-설정)
     * [4.3 Substitution Macros](#43-substitution-macros)
   * [5. Native Specification](#5-native-specification)
     * [5.1 Native markup Request Object](#51-native-markup-request-object)
@@ -61,6 +64,9 @@ ExelBid RTB Integration Guide
 ExelBid(Excellent Bid) is an OpenRTB protocol–based advertisement auction system operating between Demand-Side Providers (DSP) and Supply-Side Providers (SSP). ExelBid currently supports OpenRTB 2.3 and OpenRTB Native-Ads-Specification 1.0. However, we do not fully support the Object from the spec but is limited to our definition in this document.
 
 #### 1.2 Integration Process
+
+#### 1.3 ExelBid History
+- 2017-06-23 - Add optouturl to Bid Response bid-ext, and implement 4.2.5 Opt-out setting guide (※Korea Communication Commission – Customized online ad privacy protection guide)
 
 ### 2. OpenRTB Basics
 
@@ -361,6 +367,22 @@ Top-level object that uses ID congruent to BidRequest’s ID. At least one seatb
  w       | integer      |              | Width of the creative in pixels.                                                                                                                                                           
  h       | integer      |              | Height of the creative in pixels.                                                                                                                                                             
  ext     | object       |              | Extension of the OpenRTB specification. Exelbid uses ext field for Native creative response using JSON.
+
+##### 4.2.4 Object: Ext
+
+ Bid Object’s Ext. Native ad request includes bid response object and optouturl (ad information link URL)
+
+   Name    | Type         | Required, Default  | Description                                                                                                                                                                                  
+  :--------|:-------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   native      | object       |          | bid reponse object for native bid request                                                                                                         
+   optouturl   | string       | recommend | set up opt-out url for customized targeting ad
+
+##### 4.2.5 Opt-out Setting
+
+   ※ According to Customized online ad privacy protection guide (Korea Communication Commission-2014), online customized ad business holder need to provide opt-out option for the shown ad  _**(only for targeting ads)**_ .
+   - For image banners, icon and link must be set up at Response Bid -> adm
+   - For natives, sdk will guide to show icon and link if there is optouturl at bid-ext
+
 
 #### 4.3 Substitution Macros
 

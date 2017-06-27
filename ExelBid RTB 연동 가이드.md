@@ -4,6 +4,7 @@ ExelBid RTB 연동 가이드
   * [1. ExcelBid 소개](#1-excelbid-소개)
     * [1.1 ExelBid RTB?](#11-exelbid-rtb)
     * [1.2 ExelBid 연동 절차](#12-exelbid-연동-절차)
+    * [1.3 ExelBid History](#13-exelbid-history)
   * [2. OpenRTB Basics](#2-openrtb-basics)
     * [2.1 전송](#21-전송)
     * [2.2 Data Format](#22-data-format)
@@ -34,6 +35,8 @@ ExelBid RTB 연동 가이드
       * [4.2.1 Object: BidResponse](#421-object-bidresponse)
       * [4.2.2 Object: SeatBid](#422-object-seatbid)
       * [4.2.3 Object: Bid](#423-object-bid)
+      * [4.2.4 Object: Ext](#424-object-ext)
+      * [4.2.5 Opt-out 설정](#425-opt-out-설정)
     * [4.3 치환(Substitution Macros)](#43-치환substitution-macros)
   * [5. Native 규격](#5-native-규격)
     * [5.1 입찰 요청](#51-입찰-요청)
@@ -65,6 +68,9 @@ ExelBid(Excellent Bid)는 광고 구매자(DSP)와 퍼블리셔 인벤토리 판
 ***OpenRTB Specification version 2.3, OpenRTB-Native-Ads-Specification 1.0*** 을 기반으로 합니다. 다만, 해당 Object를 완전히 지원하지 않으며, 현 규격에 정의된 범위에 한정합니다.
 
 #### 1.2 ExelBid 연동 절차
+
+#### 1.3 ExelBid History
+- 2017-06-23 - [BidResponse bid-ext에 optouturl 추가](#424-object-ext) 및 [4.2.5 Opt-out 설정](#425-opt-out-설정) 가이드 적용(※ 방송통신위원회 - 온라인 맞춤형 광고 개인정보보호 가이드라인)
 
 ### 2. OpenRTB Basics
 
@@ -361,6 +367,23 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  w       | integer      |              | 광고물 넓이(pixel)                                                                                                                                                                           
  h       | integer      |              | 광고물 높이(pixel)                                                                                                                                                                           
  ext     | object       |              | 규격 표준을 벗어나는 OpenRTB 주체가 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다.<br>ExelBid에서는 주로 Native 응답에 사용한다.
+
+
+##### 4.2.4 Object: Ext
+
+Bid Object의 Ext. 네이티브 요청시의 응답객체, optouturl(광고 정보 표시 링크 URL)등이 포함 됩니다.
+
+  Name    | Type         | 필수, 기본값 | Description                                                                                                                                                                                  
+ :--------|:-------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  native      | object       |          | 네이티브 요청시의 응답 오브젝트                                                                                                         
+  optouturl   | string       | 권장         | 맞춤형 광고일 경우의 opt-out 설정 url.
+
+##### 4.2.5 Opt-out 설정
+
+  ※ 온라인 맞춤형 광고 개인정보보호 가이드(방송통신위원회-2017)에 따라서 온라인 맞춤형 광고 사업자는 _**맞춤형 광고의 경우**_ 해당 광고에 대해 opt-out 설정할 수 있는 방법을 제공하여야 합니다.
+  - 이미지 배너의 경우는 Response bid->adm에 직접 아이콘및 링크가 적용되어야 합니다.
+  - Native의 경우는 bid-ext에 optouturl을 응답하면 sdk에서 표시 하도록 가이드합니다.
+
 
 #### 4.3 치환(Substitution Macros)
 
