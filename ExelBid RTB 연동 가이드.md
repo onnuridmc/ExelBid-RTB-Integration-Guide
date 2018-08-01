@@ -1178,7 +1178,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
                 {
                     "id": "5b6154d92cac31b34a9ea1fb",
                     "impid": "1",
-                    "price": 10,
+                    "price": 20,
                     "nurl": "http://xxx.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
                     "adm": "<VAST ...",
                     "adomain": [

@@ -1180,7 +1180,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
                 {
                     "id": "5b6154d92cac31b34a9ea1fb",
                     "impid": "1",
-                    "price": 10,
+                    "price": 20,
                     "nurl": "http://xxx.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
                     "adm": "<VAST ...",
                     "adomain": [
