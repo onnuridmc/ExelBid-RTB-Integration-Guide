@@ -221,7 +221,8 @@ This object should be included if the ad supported content is a website as oppos
  cat        | string array |              | Array of IAB content categories of the site. Refer to OpenRTB List 5.1.                                 
  sectioncat | string array |              | Array of IAB content categories that describe the current page or view of the site. Refer to OpenRTB List 5.1.                             
  mobile     | integer      |              | Mobile-optimized signal, where 0 = no, 1 = yes.                          
- publisher  | object       |              | Details about the Publisher (Section 3.2.8) of the site.                                        
+ publisher  | object       |              | Details about the Publisher (Section 3.2.8) of the site.      
+ content  | object       | Required         | Details about the Content (Section 3.2.9) within the site.                                            
 
 ##### 3.2.7 Object: App
 

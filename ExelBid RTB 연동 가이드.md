@@ -221,7 +221,8 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  cat        | string array |              | 전체 IAB 카테고리 리스트                                       
  sectioncat | string array |              | 현재 섹션의 IAB 카테고리 리스트                                
  mobile     | integer      |              | 모바일 최적화 여부 0 = no, 1 = yes                             
- publisher  | object       |              | publisher 상세 정보                                            
+ publisher  | object       |              | publisher 상세 정보        
+ content    | object       |             | content 상세 정보                                        
 
 ##### 3.2.7 Object: App
 
