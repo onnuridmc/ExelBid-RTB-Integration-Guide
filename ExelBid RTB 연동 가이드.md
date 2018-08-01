@@ -18,17 +18,19 @@ ExelBid RTB 연동 가이드
       * [3.2.2 Object: Imp](#322-object-imp)
         * [3.2.2.1 Object: Ext](#3221-object-ext)
       * [3.2.3 Object: Banner](#323-object-banner)
-      * [3.2.4 Object: Native](#324-object-native)
-      * [3.2.5 Object: Site](#325-object-site)
-      * [3.2.6 Object: App](#326-object-app)
-      * [3.2.7 Object: Publisher](#327-object-publisher)
-      * [3.2.8 Object: Device](#328-object-device)
-      * [3.2.9 Object: Geo](#329-object-geo)
-      * [3.2.10 Object: User](#3210-object-user)
-      * [3.2.11 Object: Data](#3211-object-data)
-      * [3.2.12 Object: Segment](#3212-object-segment)
-      * [3.2.13 Object: Pmp](#3213-object-pmp)
-      * [3.2.14 Object: Deal](#3214-object-deal)
+      * [3.2.4 Object: Video](#324-object-video)
+      * [3.2.5 Object: Native](#325-object-native)
+      * [3.2.6 Object: Site](#326-object-site)
+      * [3.2.7 Object: App](#327-object-app)
+      * [3.2.8 Object: Publisher](#328-object-publisher)
+      * [3.2.9 Object: Content](#329-object-content)
+      * [3.2.10 Object: Device](#3210-object-device)
+      * [3.2.11 Object: Geo](#3211-object-geo)
+      * [3.2.12 Object: User](#3212-object-user)
+      * [3.2.13 Object: Data](#3213-object-data)
+      * [3.2.14 Object: Segment](#3214-object-segment)
+      * [3.2.15 Object: Pmp](#3215-object-pmp)
+      * [3.2.16 Object: Deal](#3216-object-deal)
   * [4. 입찰 응답(Bid Response Specification)](#4-입찰-응답bid-response-specification)
     * [4.1 Object Model](#41-object-model)
     * [4.2 Object Specifications](#42-object-specifications)
@@ -46,9 +48,11 @@ ExelBid RTB 연동 가이드
     * [7.1 Bid Requests](#71-bid-requests)
       * [7.1.1 Example 1 (이미지 광고 요청)](#711-example-1-(이미지-광고-요청))
       * [7.1.2 Example 2 (Native 광고 요청)](#712-example-2-(native-광고-요청))
+      * [7.1.3 Example 3 (Video TV PMP 광고 요청)](#713-example-3-(video-tv-pmp-광고-요청))
     * [7.2 Bid Responses](#72-bid-responses)
       * [7.2.1 Example 1 (이미지 광고 응답)](#721-example-1-(이미지-광고-응답))
       * [7.2.2 Example 2 (Native 광고 응답)](#722-example-2-(native-광고-응답))
+      * [7.2.3 Example 3 (Video PMP 광고 응답)](#723-example-3-(video-pmp-광고-응답))
   * [8. Extension 설명](#8-extension-설명)
     * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
       * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
@@ -92,6 +96,7 @@ Content-Type: application/json
 #### 2.3 OpenRTB Version HTTP Header
 
 OpenRTB 버전을 입찰 요청의 헤더에 포합니다. ExelBid는 OpenRTB 2.3버전을 포함합니다.
+(동영상을 위해서 일부 2.4버전을 포함합니다.)
 
 ```
 x-openrtb-version: 2.3
@@ -139,8 +144,9 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
  Name              | Type    | 필수, 기본값    | Description                                                  
 :------------------|:--------|:----------------|:-------------------------------------------------------------
  id                | string  | 필수            | BidRequest 오브젝트 안에서 imp를 구분하기 위한 고유 식별자   
- banner            | object  | 필수(or native) | banner 혹은 native 오브젝트중 하나를 포함하고 있어야 합니다.
- native            | object  | 필수(or banner) | banner 혹은 native 오브젝트중 하나를 포함하고 있어야 합니다.
+ banner            | object  | *필수           | banner, video, native 오브젝트중 하나 이상을 포함하고 있어야 합니다.
+ video             | object  | *필수           | banner, video, native 오브젝트중 하나 이상을 포함하고 있어야 합니다.
+ native            | object  | *필수           | banner, video, native 오브젝트중 하나 이상을 포함하고 있어야 합니다.
  pmp               | object  |                 | Pmp 오브젝트는 이 Imp 오브젝트에 대한 PMP 협약을 포함합니다.
  displaymanager    | string  |                 | 노출 sdk 이름                                                
  displaymanagerver | string  |                 | 노출 sdk 버전                                                
@@ -160,7 +166,7 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
 
 ##### 3.2.3 Object: Banner
 
-디스플레이 광고(native, video가 아닌 일반 광고일 경우 반드시 포함되어야 합니다.
+디스플레이 광고. native, video가 아닌 일반 광고일 경우 반드시 포함되어야 합니다.
 
  Name     | Type          | 필수, 기본값 | Description                                                                          
 :---------|:--------------|:-------------|:-------------------------------------------------------------------------------------
@@ -170,9 +176,30 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
  btype    | integer array |              | 제외 되어야 할 광고물 종류<br>IAB OpenRTB Spec 2.3 > 표 5.2 참조                     
  battr    | integer array |              | 제외 되어야 할 광고물 속성<br>IAB OpenRTB Spec 2.3 > 표 5.3 참조                     
  pos      | integer       | 기본값 0     | 광고 위치. IAB OpenRTB Spec 2.3 > 표 5.4 참조                                        
- topframe | integer       | 기본값 0     | 배너가 최상위 프레임에 전송되는지 여부.<br>1 최상위, 0 최상위 아님                   
+ topframe | integer       | 기본값 0     | 배너가 최상위 프레임에 전송되는지 여부.<br>1 최상위, 0 최상위 아님    
 
-##### 3.2.4 Object: Native
+##### 3.2.4 Object: Video
+비디오 광고 
+
+ Name     | Type          | 필수, 기본값 | Description                                                                          
+:---------|:--------------|:-------------|:-------------------------------------------------------------------------------------
+ mimes    | string array  | 필수         | 지원하는 컨텐츠 MIME 타입들
+ minduration | integer  | 필수           | 비디오광고 최소 길이 초.
+ maxduration | integer  | 필수           | 비디오광고 최대 길이 초.
+ protocols | integer array  | 필수       | 지원하는 비디오광고 프로토콜 리스트 <br>IAB OpenRTB Spec 2.3 > 표 5.8 참조  
+ w        | integer       | 필수         | 비디오 플레이어의 넓이 픽셀.  
+ h        | integer       | 필수         | 비디오 플레이어의 높이 픽셀.
+ startdelay | integer     |             | 광고가 시작되는 시작 딜레이 초단위, pre-roll, mid-roll, post-roll 광고 위치.<br>IAB OpenRTB Spec 2.3 > 표 5.10 참조
+ linearity | integer      |             | 광고의 linearity 여부 <br>IAB OpenRTB Spec 2.3 > 표 5.7 참조                     
+ sequence  | integer      |            | 여러개의 impression일 경우 시퀀스 숫자.
+ battr     | integer      |             | 블락 크리에티브 속성  <br>IAB OpenRTB Spec 2.3 > 표 5.3 참조  
+ boxingallowed | integer      | 기본값 1  | 크리에티브 사이즈가 달라도 박싱처리해서 플레이 하는지 여부. 0 = no, 1 = yes
+ playbackmethod | integer array |       | IAB OpenRTB Spec 2.3 > 표 5.9 참조  
+ companionad | object array |       | Banner 오브젝트 리스트. 컨페니언광고가 있을경우 사용.
+ companiontype | integer array |       | 지원하는 VAST 컨패니언 광고 종류.
+ api | integer array |       | 지원하는 API framework 리스트 <br>IAB OpenRTB Spec 2.3 > 표 5.6 참조                 
+
+##### 3.2.5 Object: Native
 
 Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. 트위터, 페이스북등)에 유사하게 혼합되기 위함으로, Open RTB Native Spec에 의해 응답 되어야 합니다.
 
@@ -182,7 +209,7 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  ver     | string        |              | Native Ad Spec 버전                                                                                
  battr   | integer array |              | 제외 되어야 할 광고물 속성 <br>IAB OpenRTB Spec 2.3 > 표 5.3 참조                                  
 
-##### 3.2.5 Object: Site
+##### 3.2.6 Object: Site
 
 광고가 전송될 지면이 웹사이트일 경우 반드시 포함되어야 합니다. site오브젝트와 app오브젝트와 동시에 포함 할 수 없습니다.
 
@@ -196,7 +223,7 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  mobile     | integer      |              | 모바일 최적화 여부 0 = no, 1 = yes                             
  publisher  | object       |              | publisher 상세 정보                                            
 
-##### 3.2.6 Object: App
+##### 3.2.7 Object: App
 
 광고가 전송될 지면이 어플리케이션일 경우 반드시 포함되어야 합니다. site오브젝트와 app오브젝트와 동시에 포함 할 수 없습니다.
 
@@ -211,9 +238,10 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  sectioncat | string array |              | 현재 섹션의 IAB 카테고리 리스트                           
  ver        | integer      |              | 어플리케이션 버전                                         
  paid       | integer      |              | 0 = 무료, 1 = 유료                                        
- publisher  | object       | 필수         | publisher 상세 정보                                       
+ publisher  | object       | 필수         | publisher 상세 정보 
+ content    | object       |             | content 상세 정보                                   
 
-##### 3.2.7 Object: Publisher
+##### 3.2.8 Object: Publisher
 
  Name   | Type         | 필수, 기본값 | Description                     
 :-------|:-------------|:-------------|:--------------------------------
@@ -222,7 +250,22 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  cat    | string array |              | publisher의 IAB 카테고리 리스트
  domain | string       |              | 최상위 도메인                   
 
-##### 3.2.8 Object: Device
+##### 3.2.9 Object: Content
+
+(*) 항목은 IAB OpenRTB Spec 2.4 에서 가져온다.
+
+ Name   | Type         | 필수, 기본값 | Description                     
+:-------|:-------------|:-------------|:--------------------------------
+ id     | string       |          | 컨텐츠 아이디 
+ episode   | integer   |          | 에피소드 넘버(통상 비디오 컨텐츠)       
+ title    | string     |          | 컨텐츠 제목
+ series | string       |          | 컨텐츠 시리즈
+ season | string       |          | 컨텐츠 시즌
+ language | string     |          | 컨텐츠 지원 언어 ISO-639-1-alpha-2.
+ genre    | string     | *         | 컨텐츠 장르
+ data     | object array  | *         | 컨텐츠 데이타
+
+##### 3.2.10 Object: Device
 
 하드웨어, 플랫폼, 위치, 통신사등 해당 기기와 관련되 정보를 제공합니다.
 
@@ -244,7 +287,7 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  connectiontype | string  |              | 네트워크 연결 종류 IAB OpenRTB Spec 2.3 > 표 5.18 참조          
  ifa            | string  | 권장         | 광고 트래킹 아이디(android = gaid, ios = ifda)                  
 
-##### 3.2.9 Object: Geo
+##### 3.2.11 Object: Geo
 
 Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 적용 될 수 있습니다.
 
@@ -255,7 +298,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  type    | integer |              | 데이터 출처. IAB OpenRTB Spec 2.3 > 표 5.16 참조
  country | string  |              | 국가 코드. ISO-3166-1-alpha-3.                   
 
-##### 3.2.10 Object: User
+##### 3.2.12 Object: User
 
 디바이스 사용자의 정보를 나타냅니다.
 
@@ -267,7 +310,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  keywords | string  |              | key:value 형식을 콤마로 구분한 사용자 관련 키워드 리스트(ex = e_age:40,e_gender:F)
  geo      | object  |              | 위치 정보                                                                          
 
-##### 3.2.11 Object: Data
+##### 3.2.13 Object: Data
 
 다양한 출처(ex : exchange 자체, 제 3의 제공자 등)로 제공되는 추가적인 사용자 데이터를 그룹화 하여 하나의 Data로 제공합니다.
 
@@ -277,7 +320,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  name    | string       |              | 데이터 제공자                               
  segment | object array |              | 데이터를 포함하는 segment 오브젝트 배열     
 
-##### 3.2.12 Object: Segment
+##### 3.2.14 Object: Segment
 
 상위 Data오브젝트에서 지정된 제공자로 부터의 일정 정보를 포함합니다.
 
@@ -287,7 +330,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  name  | string |              | 데이터 이름                       
  value | string |              | 데이터      
 
-##### 3.2.13 Object: Pmp
+##### 3.2.15 Object: Pmp
 
  Imp오브젝트에 포함되며, Private MarketPlace 또는 직거래에서 RTB 프로토콜을 사용하기 위해 필요한
  정보를 포함합니다.
@@ -297,7 +340,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
   private_auction   | string | 기본값 0     | 데이터를 구분하는 유니크한 아이디
   deals             | object |             | Imp에 해당하는 직거래 리스트를 내포하고 있는 deal 오브젝트 배열    
 
-##### 3.2.14 Object: Deal
+##### 3.2.16 Object: Deal
 
   구매자와 판매자간에 사전 협약된 거래로서, 상위 Imp가 이 계약 조건하에 가능하다는 것을 명시합니다.
 
@@ -909,6 +952,100 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 }
 ```
 
+#### 7.1.3 Example 3 (Video TV PMP 광고 요청)
+
+```json
+{
+    "id": "5b6154d99d9ee2ad4134a340",
+    "imp": [
+        {
+            "id": "1",
+            "video": {
+                "mimes": [
+                    "video/mp4"
+                ],
+                "minduration": 30,
+                "maxduration": 30,
+                "protocols": [
+                    2,
+                    3,
+                    5,
+                    6
+                ],
+                "w": 1920,
+                "h": 1080,
+                "boxingallowed": 1
+            },
+            "displaymanager": "ExelBid",
+            "displaymanagerver": "0.0.1",
+            "instl": 1,
+            "tagid": "tagid_xxx",
+            "secure": 0,
+            "pmp": {
+                "private_auction": 1,
+                "deals": [
+                    {
+                        "id": "deal_testid",
+                        "bidfloorcur": "USD",
+                        "bidfloor": 20,
+                        "at": 1,
+                    }
+                ]
+            }
+        }
+    ],
+    "app": {
+        "id": "d3c1ef9c",
+        "name": "Exelbid Sample",
+        "bundle": "tv.xxx",
+        "cat": [
+            "IAB1-7"
+        ],
+        "publisher": {
+            "id": "11",
+            "name": "Exelbid Sample",
+            "cat": [
+                "IAB3"
+            ]
+        },
+        "content": {
+            "id": "content_id100",
+            "episode": 3,
+            "title": "StarWars",
+            "data": [
+                {
+                    "name": "Data Provider SKB",
+                    "segment": [
+                        {
+                            "name": "content_group",
+                            "value": "SF Movie"
+                        }
+                    ]
+                }
+            ],
+            "genre": "SF"
+        }
+    },
+    "device": {
+        "geo": {
+            "country": "KOR"
+        },
+        "dnt": 0,
+        "lmt": 0,
+        "ip": "0.0.0.0",
+        "devicetype": 3,
+        "os": "CTV",
+        "language": "ko"
+    },
+    "user": {},
+    "at": 2,
+    "tmax": 500,
+    "cur": [
+        "USD"
+    ]
+}
+```
+
 #### 7.2 Bid Responses
 
 ##### 7.2.1 Example 1 (이미지 광고 응답)
@@ -1027,6 +1164,45 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
     }
   ],
   "cur": "USD"
+}
+```
+
+##### 7.2.3 Example 3 (Video PMP 광고 응답)
+
+```json
+{
+    "id": "5b6154d99d9ee2ad4134a340",
+    "seatbid": [
+        {
+            "bid": [
+                {
+                    "id": "5b6154d92cac31b34a9ea1fb",
+                    "impid": "1",
+                    "price": 10,
+                    "nurl": "http://xxx.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
+                    "adm": "<VAST ...",
+                    "adomain": [
+                        "abc.com"
+                    ],
+                    "iurl": "http://xxx.com/image-00001.png",
+                    "cid": "cid100",
+                    "crid": "crid100",
+                    "cat": [
+                        "IAB1-5"
+                    ],
+                    "attr": [
+                        6,
+                        7
+                    ],
+                    "h": 1920,
+                    "w": 1080,
+                    "dealid": "deal_testid",
+                }
+            ],
+            "seat": "xxx"
+        }
+    ],
+    "cur": "USD"
 }
 ```
 

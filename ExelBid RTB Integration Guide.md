@@ -18,17 +18,19 @@ ExelBid RTB Integration Guide
       * [3.2.2 Object: Imp](#322-object-imp)
         * [3.2.2.1 Object: Ext](#3221-object-ext)
       * [3.2.3 Object: Banner](#323-object-banner)
-      * [3.2.4 Object: Native](#324-object-native)
-      * [3.2.5 Object: Site](#325-object-site)
-      * [3.2.6 Object: App](#326-object-app)
-      * [3.2.7 Object: Publisher](#327-object-publisher)
-      * [3.2.8 Object: Device](#328-object-device)
-      * [3.2.9 Object: Geo](#329-object-geo)
-      * [3.2.10 Object: User](#3210-object-user)
-      * [3.2.11 Object: Data](#3211-object-data)
-      * [3.2.12 Object: Segment](#3212-object-segment)
-      * [3.2.13 Object: Pmp](#3213-object-pmp)
-      * [3.2.14 Object: Deal](#3214-object-deal)
+      * [3.2.4 Object: Video](#324-object-video)
+      * [3.2.5 Object: Native](#325-object-native)
+      * [3.2.6 Object: Site](#326-object-site)
+      * [3.2.7 Object: App](#327-object-app)
+      * [3.2.8 Object: Publisher](#328-object-publisher)
+      * [3.2.9 Object: Content](#329-object-content)
+      * [3.2.10 Object: Device](#3210-object-device)
+      * [3.2.11 Object: Geo](#3211-object-geo)
+      * [3.2.12 Object: User](#3212-object-user)
+      * [3.2.13 Object: Data](#3213-object-data)
+      * [3.2.14 Object: Segment](#3214-object-segment)
+      * [3.2.15 Object: Pmp](#3215-object-pmp)
+      * [3.2.16 Object: Deal](#3216-object-deal)
   * [4. Bid Response Specification](#4-bid-response-specification)
     * [4.1 Object Model](#41-object-model)
     * [4.2 Object Specifications](#42-object-specifications)
@@ -46,9 +48,11 @@ ExelBid RTB Integration Guide
     * [7.1 Bid Requests](#71-bid-requests)
       * [7.1.1 Example 1 (Image Banner Creative)](#711-example-1-(image-banner-creative))
       * [7.1.2 Example 2 (Native Creative)](#712-example-2-(native-creative))
+      * [7.1.3 Example 3 (Video TV PMP)](#713-example-3-(video-tv-pmp))
     * [7.2 Bid Responses](#72-bid-responses)
       * [7.2.1 Example 1 (Image Banner Creative Response)](#721-example-1-(image-banner-creative-response))
       * [7.2.3 Example 2 (Native Markup Returned Inline)](#722-example-2-(native-markup-returned-inline))
+      * [7.2.3 Example 3 (Video PMP)](#723-example-3-(video-pmp))
   * [8. Extension Explanation](#8-extension-explanation)
     * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
       * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
@@ -88,6 +92,8 @@ Content-Type: application/json
 #### 2.3 OpenRTB Version HTTP Header
 
 Include OpenRTB version to request header. ExelBid is on OpenRTB 2.3
+
+Include part of OpenRTB 2.4 for video inventory.
 
 ```
 x-openrtb-version: 2.3
@@ -132,11 +138,14 @@ The top-level bid request object contains a globally unique bid request, auction
 
 This object describes an ad placement or impression being auctioned.
 
+(*)Either one of banner or native must is required.
+
  Name              | Type    | Required, Default    | Description                                                  
 :------------------|:--------|:----------------|:-------------------------------------------------------------
  id                | string  | Required            | A unique identifier for this impression within the context of the bid request.
- banner            | object  | Required(or native) | Either one of banner or native must is required.
- native            | object  | Required(or banner) | Either one of banner or native must is required.
+ banner            | object  | *Required | At least one of banner, video, or native is required
+ video             | object  | *Required | At least one of banner, video, or native is required
+ native            | object  | *Required | At least one of banner, video, or native is required
  pmp               | object  |                 | Pmp object includes this imp’s object’s PMP agreement.
  displaymanager    | string  |                 | Name of ad mediation partner, SDK technology, or player responsible for rendering ad.                                               
  displaymanagerver | string  |                 | Version of ad mediation partner, SDK technology, or player responsible for rendering ad.                                              
@@ -168,7 +177,29 @@ If not native or video ad, Banner object must be included.
  pos      | integer       | Default 0     | Ad position on screen. Refer to OpenRTB Spec 2.3 List 5.4                               
  topframe | integer       | Default 0     | Indicates if the banner is in the top frame as opposed to an iframe, where 0 = no, 1 = yes.                
 
-##### 3.2.4 Object: Native
+##### 3.2.4 Object: Video
+
+If not native or video ad, Banner object must be included.
+
+ Name     | Type          | Required, Default | Description                                                                         
+:---------|:--------------|:-------------|:-------------------------------------------------------------------------------------
+ mimes    | string array  | Required         | Content MIME types supported.
+ minduration | integer  | Required           | Minimum video ad duration in seconds.
+ maxduration | integer  | Required           | Maximum video ad duration in seconds.
+ protocols | integer array  | Required       | Array of supported video bid response protocols. <br>Refer to OpenRTB Spec 2.3 List 5.8    
+ w        | integer       | Required         | Width of the video player in pixels. 
+ h        | integer       | Required         | Height of the video player in pixels.
+ startdelay | integer     |             | Indicates the start delay in seconds for pre-roll, mid-roll, or post-roll ad placements. <br>Refer to OpenRTB Spec 2.3 List 5.10.
+ linearity | integer      |             | Indicates if the impression must be linear, nonlinear, etc. If none specified, assume all are allowed. <br>Refer to OpenRTB Spec List 5.7.                  
+ sequence  | integer      |            | If multiple ad impressions are offered in the same bid request, the sequence number will allow for the coordinated delivery of multiple creatives.
+ battr     | integer      |             | Blocked creative attributes. <br>Refer to OpenRTB Spec List 5.3.
+ boxingallowed | integer      | Default 1  | Indicates if letter-boxing of 4:3 content into a 16:9 window is allowed, where 0 = no, 1 = yes.
+ playbackmethod | integer array |       | Allowed playback methods. If none specified, assume all are allowed. <br>Refer to OpenRTB Spec 2.3 List 5.9.
+ companionad | object array |       | Array of Banner objects if companion ads are available.
+ companiontype | integer array |       | Supported VAST companion ad types. <br>Refer to OpenRTB Spec 2.3List 5.12.
+ api | integer array |       | List of supported API frameworks for this impression. <br>Refer to OpenRTB Spec 2.3 List 5.6.
+
+##### 3.2.5 Object: Native
 
 This object represents a native type impression. Native ad units are intended to blend seamlessly into the surrounding content (e.g., a sponsored Twitter or Facebook post). As such, the response must be well-structured to afford the publisher fine-grained control over rendering.
 
@@ -178,7 +209,7 @@ This object represents a native type impression. Native ad units are intended to
  ver     | string        |              | Version of the Native Ad Specification to which request complies.                                                                         
  battr   | integer array |              | Blocked creative attributes. Refer to OpenRTB 2.3 List 5.3.                              
 
-##### 3.2.5 Object: Site
+##### 3.2.6 Object: Site
 
 This object should be included if the ad supported content is a website as opposed to a non-browser application. A bid request must not contain both a Site and an App object.
 
@@ -192,7 +223,7 @@ This object should be included if the ad supported content is a website as oppos
  mobile     | integer      |              | Mobile-optimized signal, where 0 = no, 1 = yes.                          
  publisher  | object       |              | Details about the Publisher (Section 3.2.8) of the site.                                        
 
-##### 3.2.6 Object: App
+##### 3.2.7 Object: App
 
 This object should be included if the ad supported content is a non-browser application (typically in mobile) as opposed to a website. A bid request must not contain both an App and a Site object.
 
@@ -206,10 +237,11 @@ This object should be included if the ad supported content is a non-browser appl
  cat        | string array |              | Array of IAB content categories of the site. Refer to OpenRTB List 5.1.                                  
  sectioncat | string array |              |Array of IAB content categories that describe the current page or view of the site. Refer to OpenRTB List 5.1.                           
  ver        | integer      |              | Application version.                                         
- paid       | integer      |              | 0 = app is free, 1 = the app is a paid version.                                        
- publisher  | object       | Required         | Details about the Publisher (Section 3.2.8) of the app.                                       
+ paid       | integer      |              | 0 = app is free, 1 = the app is a paid version.       
+ publisher  | object       | Required         | Details about the Publisher (Section 3.2.8) of the app.  
+ content  | object       | Required         | Details about the Content (Section 3.2.9) within the app.                
 
-##### 3.2.7 Object: Publisher
+##### 3.2.8 Object: Publisher
 
  Name   | Type         | Required, Default | Description                     
 :-------|:-------------|:-------------|:--------------------------------
@@ -218,7 +250,22 @@ This object should be included if the ad supported content is a non-browser appl
  cat    | string array |              | Array of IAB content categories that describe the publisher. Refer to OpenRTB 2.3 List 5.1.
  domain | string       |              | Highest level domain of the publisher.             
 
-##### 3.2.8 Object: Device
+##### 3.2.9 Object: Content
+
+(*) Refer to IAB OpenRTB Spec 2.4
+
+ Name   | Type         | Required, Default | Description                     
+:-------|:-------------|:-------------|:--------------------------------
+ id     | string       |          | ID uniquely identifying the content.
+ episode   | integer   |          | Episode number (typically applies to video content).      
+ title    | string     |          | Content title.
+ series | string       |          | Content series.
+ season | string       |          | Content season
+ language | string     |          | Content language using ISO-639-1-alpha-2.
+ genre    | string     | *         | Genre that best describes the content
+ data     | object array  | *         | Additional content data. Each Data object (Section 3.2.11) represents a different data source.
+
+##### 3.2.10 Object: Device
 
 This object describes the publisher of the media in which the ad will be displayed.
 
@@ -240,7 +287,7 @@ This object describes the publisher of the media in which the ad will be display
  connectiontype | string  |              | Network connection type. Refer to OpenRTB 2.3 List 5.18.        
  ifa            | string  | Required         | ID sanctioned for advertiser use in the clear.                  
 
-##### 3.2.9 Object: Geo
+##### 3.2.11 Object: Geo
 
 This object encapsulates various methods for specifying a geographic location. When subordinate to a
 Device object, it indicates the location of the device which can also be interpreted as the user’s current
@@ -254,7 +301,7 @@ necessarily their current location).
  type    | integer |              | Source of location data. Refer to OpenRTB 2.3 List 5.16.
  country | string  |              | Country code using ISO-3166-1-alpha-3.               
 
-##### 3.2.10 Object: User
+##### 3.2.12 Object: User
 
 This object contains information known or derived about the human user of the device.
 
@@ -266,7 +313,7 @@ This object contains information known or derived about the human user of the de
  keywords | string  |              | Comma separated list of keywords, interests, or intent.
  geo      | object  |              | Location of the user’s home base defined by a Geo object.                                                                       
 
-##### 3.2.11 Object: Data
+##### 3.2.13 Object: Data
 
 The data and segment objects together allow additional data about the user to be specified.
 
@@ -276,7 +323,7 @@ The data and segment objects together allow additional data about the user to be
  name    | string       |              | Exchange-specific name for the data provider.                         
  segment | object array |              | Array of Segment objects that contain the actual data values.  
 
-##### 3.2.12 Object: Segment
+##### 3.2.14 Object: Segment
 
 Segment objects are essentially key-value pairs that convey specific units of data about the user
 
@@ -286,7 +333,7 @@ Segment objects are essentially key-value pairs that convey specific units of da
  name  | string |              | Name of the data segment.                      
  value | string |              | String representation of the data segment value.                           
 
-##### 3.2.13 Object: Pmp
+##### 3.2.15 Object: Pmp
 
 Included in Imp object, and includes information necessary to use RTB protocol in Private MarketPlace or direct deal.
 
@@ -296,7 +343,7 @@ Included in Imp object, and includes information necessary to use RTB protocol i
  deals             | object |             | deal object array that contains direct deals list for this imp
 
 
-##### 3.2.14 Object: Deal
+##### 3.2.16 Object: Deal
 
 This is approved agreement between the buyer and seller, and its presence
 with the PMP indicates that this impression is available under the terms of that agreement.
@@ -907,6 +954,100 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 }
 ```
 
+##### 7.1.3 Example 3 (Video TV PMP)
+
+```json
+{
+    "id": "5b6154d99d9ee2ad4134a340",
+    "imp": [
+        {
+            "id": "1",
+            "video": {
+                "mimes": [
+                    "video/mp4"
+                ],
+                "minduration": 30,
+                "maxduration": 30,
+                "protocols": [
+                    2,
+                    3,
+                    5,
+                    6
+                ],
+                "w": 1920,
+                "h": 1080,
+                "boxingallowed": 1
+            },
+            "displaymanager": "ExelBid",
+            "displaymanagerver": "0.0.1",
+            "instl": 1,
+            "tagid": "tagid_xxx",
+            "secure": 0,
+            "pmp": {
+                "private_auction": 1,
+                "deals": [
+                    {
+                        "id": "deal_testid",
+                        "bidfloorcur": "USD",
+                        "bidfloor": 20,
+                        "at": 1,
+                    }
+                ]
+            }
+        }
+    ],
+    "app": {
+        "id": "d3c1ef9c",
+        "name": "Exelbid Sample",
+        "bundle": "tv.xxx",
+        "cat": [
+            "IAB1-7"
+        ],
+        "publisher": {
+            "id": "11",
+            "name": "Exelbid Sample",
+            "cat": [
+                "IAB3"
+            ]
+        },
+        "content": {
+            "id": "content_id100",
+            "episode": 3,
+            "title": "StarWars",
+            "data": [
+                {
+                    "name": "Data Provider SKB",
+                    "segment": [
+                        {
+                            "name": "content_group",
+                            "value": "SF Movie"
+                        }
+                    ]
+                }
+            ],
+            "genre": "SF"
+        }
+    },
+    "device": {
+        "geo": {
+            "country": "KOR"
+        },
+        "dnt": 0,
+        "lmt": 0,
+        "ip": "0.0.0.0",
+        "devicetype": 3,
+        "os": "CTV",
+        "language": "ko"
+    },
+    "user": {},
+    "at": 2,
+    "tmax": 500,
+    "cur": [
+        "USD"
+    ]
+}
+```
+
 #### 7.2 Bid Responses
 
 ##### 7.2.1 Example 1 (Image Banner Creative Response)
@@ -1025,6 +1166,45 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
     }
   ],
   "cur": "USD"
+}
+```
+
+##### 7.2.3 Example 3 (Video PMP)
+
+```json
+{
+    "id": "5b6154d99d9ee2ad4134a340",
+    "seatbid": [
+        {
+            "bid": [
+                {
+                    "id": "5b6154d92cac31b34a9ea1fb",
+                    "impid": "1",
+                    "price": 10,
+                    "nurl": "http://xxx.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
+                    "adm": "<VAST ...",
+                    "adomain": [
+                        "abc.com"
+                    ],
+                    "iurl": "http://xxx.com/image-00001.png",
+                    "cid": "cid100",
+                    "crid": "crid100",
+                    "cat": [
+                        "IAB1-5"
+                    ],
+                    "attr": [
+                        6,
+                        7
+                    ],
+                    "h": 1920,
+                    "w": 1080,
+                    "dealid": "deal_testid",
+                }
+            ],
+            "seat": "xxx"
+        }
+    ],
+    "cur": "USD"
 }
 ```
 
