@@ -138,7 +138,7 @@ The top-level bid request object contains a globally unique bid request, auction
 
 This object describes an ad placement or impression being auctioned.
 
-(*)Either one of banner or native must is required.
+(*)Either one of banner, video or native must is required.
 
  Name              | Type    | Required, Default    | Description                                                  
 :------------------|:--------|:----------------|:-------------------------------------------------------------
@@ -157,7 +157,7 @@ This object describes an ad placement or impression being auctioned.
 
 ##### 3.2.2.1 Object: Ext
 
-  [ Refer to 8.Extension](#8-extension-extension)
+  [ Refer to 8.Extension](#8-extension-explanation)
 
   Name              | Type    | Required, Default    | Description                                                  
  :------------------|:--------|:----------------|:-------------------------------------------------------------
@@ -179,7 +179,7 @@ If not native or video ad, Banner object must be included.
 
 ##### 3.2.4 Object: Video
 
-If not native or video ad, Banner object must be included.
+If not native or banner ad, Video object must be included.
 
  Name     | Type          | Required, Default | Description                                                                         
 :---------|:--------------|:-------------|:-------------------------------------------------------------------------------------
@@ -437,9 +437,9 @@ The win notice URL and its format are defined by the bidder. In order for the ex
 
  Macro                   | Description                                               
 :------------------------|:----------------------------------------------------------
- ${AUCTION_ID}           | BidRequest의 id                                           
+ ${AUCTION_ID}           | ID of the bid request; from BidRequest.id attribute. 
  ${AUCTION_ID:B64}       | BidRequest id encoded in Base64.                   
- ${AUCTION_BID_ID}       | BidResponse의 id                                          
+ ${AUCTION_BID_ID}       | ID of the bid; from BidResponse.id attribute.  
  ${AUCTION_BID_ID:B64}   | BidResponse id encoded in Base64.                      
  ${AUCTION_IMP_ID}       | ID of the impression just won.                  
  ${AUCTION_IMP_ID:B64}   | ID of the impression just won. Encoded in Base64.         
@@ -1212,7 +1212,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 ### 8 Extension Explanation
 #### 8.1 Click tracking for publisher
   In Exelbid, publishers provide markup to Imp Object Extension (Imp.ext.click_through_url) to measure clicks. <br>
-  DSP는 click_through_url 을 이용하여 클릭 URL을 새로 만들어야 한다.
+  DSP should make new click URL using click_through_url.
   <table>
   <tr>
     <th>Macup</th>
