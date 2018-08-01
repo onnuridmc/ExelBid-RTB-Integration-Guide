@@ -44,12 +44,11 @@ ExelBid RTB 연동 가이드
   * [6. 참조 목록표(Enumerated Lists Specification)](#6-참조-목록표enumerated-lists-specification)
   * [7. 비딩 요청/응답 예제(Bid Request/Response Samples)](#7-비딩-요청응답-예제bid-requestresponse-samples)
     * [7.1 Bid Requests](#71-bid-requests)
-      * [7.1.1 Example 1 – 이미지 광고 요청](#711-example-1--이미지-광고-요청)
-      * [7.1.2 Example 2 – Native 광고 요청](#712-example-2--native-광고-요청)
+      * [7.1.1 Example 1 (이미지 광고 요청)](#711-example-1-(이미지-광고-요청))
+      * [7.1.2 Example 2 (Native 광고 요청)](#712-example-2-(native-광고-요청))
     * [7.2 Bid Responses](#72-bid-responses)
-      * [7.2.1 Example 1 – 이미지 광고 응답](#721-example-1--이미지-광고-응답)
-      * [7.2.2 Example 1 – Ad Served on Win Notice](#722-example-1--ad-served-on-win-notice)
-      * [7.2.3 Example 2 – Native Markup Returned Inline](#723-example-2--native-markup-returned-inline)
+      * [7.2.1 Example 1 (이미지 광고 응답)](#721-example-1-(이미지-광고-응답))
+      * [7.2.2 Example 2 (Native 광고 응답)](#722-example-2-(native-광고-응답))
   * [8. Extension 설명](#8-extension-설명)
     * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
       * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
@@ -728,7 +727,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 
 #### 7.1 Bid Requests
 
-##### 7.1.1 Example 1 – 이미지 광고 요청
+##### 7.1.1 Example 1 (이미지 광고 요청)
 
 ```json
 {
@@ -819,7 +818,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 }
 ```
 
-##### 7.1.2 Example 2 – Native 광고 요청
+##### 7.1.2 Example 2 (Native 광고 요청)
 
 ```json
 {
@@ -912,7 +911,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 
 #### 7.2 Bid Responses
 
-##### 7.2.1 Example 1 – 이미지 광고 응답
+##### 7.2.1 Example 1 (이미지 광고 응답)
 
 ```json
 {
@@ -947,9 +946,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 }
 ```
 
-##### 7.2.2 Example 1 – Ad Served on Win Notice
-
-##### 7.2.3 Example 2 – 네이티브 광고 응답
+##### 7.2.2 Example 2 (Native 광고 응답)
 
 ```json
 {

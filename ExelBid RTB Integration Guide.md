@@ -44,12 +44,11 @@ ExelBid RTB Integration Guide
   * [6. Enumerated Lists Specification](#6-enumerated-lists-specification)
   * [7. Bid Request/Response Samples](#7-bid-requestresponse-samples)
     * [7.1 Bid Requests](#71-bid-requests)
-      * [7.1.1 Example 1 – Image Banner Creative](#711-example-1--image-banner-creative)
-      * [7.1.2 Example 2 – Native Creative](#712-example-2--native-creative)
+      * [7.1.1 Example 1 (Image Banner Creative)](#711-example-1-(image-banner-creative))
+      * [7.1.2 Example 2 (Native Creative)](#712-example-2-(native-creative))
     * [7.2 Bid Responses](#72-bid-responses)
-      * [7.2.1 Example 1 – Image Banner Creative Response](#721-example-1--image-banner-creative-response)
-      * [7.2.2 Example 1 – Ad Served on Win Notice](#722-example-1--ad-served-on-win-notice)
-      * [7.2.3 Example 2 – Native Markup Returned Inline](#723-example-2--native-markup-returned-inline)
+      * [7.2.1 Example 1 (Image Banner Creative Response)](#721-example-1-(image-banner-creative-response))
+      * [7.2.3 Example 2 (Native Markup Returned Inline)](#722-example-2-(native-markup-returned-inline))
   * [8. Extension Explanation](#8-extension-explanation)
     * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
       * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
@@ -726,7 +725,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 
 #### 7.1 Bid Requests
 
-##### 7.1.1 Example 1 – Image Banner Creative
+##### 7.1.1 Example 1 (Image Banner Creative)
 
 ```json
 {
@@ -817,7 +816,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 }
 ```
 
-##### 7.1.2 Example 2 – Native Creative
+##### 7.1.2 Example 2 (Native Creative)
 
 ```json
 {
@@ -910,7 +909,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 
 #### 7.2 Bid Responses
 
-##### 7.2.1 Example 1 – Image Banner Creative Response
+##### 7.2.1 Example 1 (Image Banner Creative Response)
 
 ```json
 {
@@ -945,9 +944,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 }
 ```
 
-##### 7.2.2 Example 1 – Ad Served on Win Notice
-
-##### 7.2.3 Example 2 – Native Markup Returned Inline
+##### 7.2.2 Example 2 (Native Markup Returned Inline)
 
 ```json
 {
