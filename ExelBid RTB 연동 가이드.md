@@ -1015,7 +1015,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
             "title": "StarWars",
             "data": [
                 {
-                    "name": "Data Provider SKB",
+                    "name": "Data Provider Exelbid",
                     "segment": [
                         {
                             "name": "content_group",

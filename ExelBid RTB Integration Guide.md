@@ -1017,7 +1017,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
             "title": "StarWars",
             "data": [
                 {
-                    "name": "Data Provider SKB",
+                    "name": "Data Provider Exelbid",
                     "segment": [
                         {
                             "name": "content_group",
