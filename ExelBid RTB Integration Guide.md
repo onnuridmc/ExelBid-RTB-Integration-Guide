@@ -828,7 +828,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
       "cat": [
         "IAB3"
       ],
-      "domain": "www.xxx.com"
+      "domain": "test.exelbid.com"
     }
   },
   "device": {
@@ -1063,12 +1063,12 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
           "id": "57c52635e0012acf8c2a86e9",
           "impid": "1",
           "price": 1,
-          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
-          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "iurl": "http://test.exelbid.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
           "cid": "177",
           "crid": "470",
           "cat": [
@@ -1102,7 +1102,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
           "adomain": [
             "onnuridmc.com"
           ],
-          "iurl": "http://xxx.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
+          "iurl": "http://test.exelbid.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
           "cid": "178",
           "crid": "527",
           "cat": [
@@ -1114,7 +1114,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
             "native": {
               "ver": "1.0.0.2",
               "link": {
-                "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
+                "url": "http://test.exelbid.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
               },
               "imptrackers": [
                 "http://kr-09.cross-target.com/exelbid/imgtracker?id=57c5468e0c5fb71f81bf6967&cb_click_url=${CLICK_URL}&price=${AUCTION_PRICE}"
@@ -1126,7 +1126,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
                     "value": "지금설치2"
                   },
                   "link": {
-                    "url": "http://xxx.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
+                    "url": "http://test.exelbid.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
                   }
                 },
                 {
@@ -1138,7 +1138,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
                 {
                   "id": 2,
                   "img": {
-                    "url": "http://xxx.com/banner/201606/f5c17b5a78a974229a29e761517ed120.png",
+                    "url": "http://test.exelbid.com/banner/201606/f5c17b5a78a974229a29e761517ed120.png",
                     "w": 80,
                     "h": 80
                   }
@@ -1146,7 +1146,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
                 {
                   "id": 4,
                   "img": {
-                    "url": "http://xxx.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
+                    "url": "http://test.exelbid.com/banner/201606/23d4472b27bb3795a5c403b5374906e7.jpg",
                     "w": 1200,
                     "h": 627
                   }
@@ -1182,12 +1182,12 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
                     "id": "5b6154d92cac31b34a9ea1fb",
                     "impid": "1",
                     "price": 20,
-                    "nurl": "http://xxx.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
+                    "nurl": "http://test.exelbid.com/nurl?id=5b6154d92cac31b34a9ea1fb&price=${AUCTION_PRICE}",
                     "adm": "<VAST ...",
                     "adomain": [
                         "abc.com"
                     ],
-                    "iurl": "http://xxx.com/image-00001.png",
+                    "iurl": "http://test.exelbid.com/image-00001.png",
                     "cid": "cid100",
                     "crid": "crid100",
                     "cat": [
@@ -1250,7 +1250,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 }
 ```
 ##### 8.1.2 Unescaped response sample
-Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9
 ```json
 {
   "id": "57a06a911b3f68cd5cacdc46",
@@ -1261,12 +1261,12 @@ Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
           "id": "57c52635e0012acf8c2a86e9",
           "impid": "1",
           "price": 1,
-          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
-          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "iurl": "http://test.exelbid.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
           "cid": "177",
           "crid": "470",
           "cat": [
@@ -1303,7 +1303,7 @@ Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
 }
 ```
 ##### 8.1.4 Escaped response sample
-Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9
 ```json
 {
   "id": "57a06a911b3f68cd5cacdc46",
@@ -1314,12 +1314,12 @@ Orignal click url : http://xxx.com/exelbid/click?id=57c52635e0012acf8c2a86e9
           "id": "57c52635e0012acf8c2a86e9",
           "impid": "1",
           "price": 1,
-          "nurl":"http://xxx.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://xxx.exelbid.com/test?id=100&redirect=http%3A%2F%2Fxxx.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
+          "adm": "<a href=\"http://xxx.exelbid.com/test?id=100&redirect=http%3A%2F%2Ftest.exelbid.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
-          "iurl": "http://xxx.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
+          "iurl": "http://test.exelbid.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg",
           "cid": "177",
           "crid": "470",
           "cat": [
