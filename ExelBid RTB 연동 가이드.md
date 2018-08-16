@@ -286,7 +286,7 @@ Native 형식의 Impression을 나타냅니다. 광고가 기존 컨텐츠(ex. �
  language       | string  |              | 브라우저 언어. ISO-639-1-alpha-2                                
  carrier        | string  |              | 통신사 또는 IP 어드레스로 부터 유도된 ISP(인터넷 서비스 제공자)
  connectiontype | string  |              | 네트워크 연결 종류 IAB OpenRTB Spec 2.3 > 표 5.18 참조          
- ifa            | string  | 권장         | 광고 트래킹 아이디(android = gaid, ios = ifda)                  
+ ifa            | string  | 권장         | 광고 트래킹 아이디(ex) android = gaid, ios = idfa)                  
 
 ##### 3.2.11 Object: Geo
 
