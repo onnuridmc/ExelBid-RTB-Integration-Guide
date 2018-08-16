@@ -824,7 +824,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
     "ver": "4.3.0",
     "publisher": {
       "id": "14",
-      "name": "xxx",
+      "name": "exelbid",
       "cat": [
         "IAB3"
       ],
@@ -869,7 +869,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 ```json
 {
   "app": {
-    "bundle": "com.xxx",
+    "bundle": "com.exelbid",
     "cat": [
       "IAB3"
     ],
@@ -877,7 +877,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
     "name": "Truecaller - Caller ID & Block",
     "publisher": {
       "id": "34",
-      "name": "xxx publisher"
+      "name": "publisher"
     },
     "ver": "6.41"
   },
@@ -1296,7 +1296,7 @@ Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2
       "instl": 0,
       "tagid": "072df02f86984dc6b50d74b0ad42bb85",
       "ext":{
-        "$click_through_url" : "http://xxx.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
+        "$click_through_url" : "http://test.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
       }
     }
   ]
@@ -1315,7 +1315,7 @@ Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2
           "impid": "1",
           "price": 1,
           "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://xxx.exelbid.com/test?id=100&redirect=http%3A%2F%2Ftest.exelbid.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adm": "<a href=\"http://test.exelbid.com/test?id=100&redirect=http%3A%2F%2Ftest.exelbid.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
