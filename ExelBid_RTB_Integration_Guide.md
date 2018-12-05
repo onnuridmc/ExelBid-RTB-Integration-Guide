@@ -38,7 +38,7 @@ ExelBid RTB Integration Guide
       * [4.2.2 Object: SeatBid](#422-object-seatbid)
       * [4.2.3 Object: Bid](#423-object-bid)
       * [4.2.4 Object: Ext](#424-object-ext)
-      * [4.2.5 Opt-out 설정](#425-opt-out-설정)
+      * [4.2.5 Opt-out Setting](#425-opt-out-setting)
     * [4.3 Substitution Macros](#43-substitution-macros)
   * [5. Native Specification](#5-native-specification)
     * [5.1 Native markup Request Object](#51-native-markup-request-object)
@@ -54,11 +54,12 @@ ExelBid RTB Integration Guide
       * [7.2.3 Example 2 (Native Markup Returned Inline)](#722-example-2-(native-markup-returned-inline))
       * [7.2.3 Example 3 (Video PMP)](#723-example-3-(video-pmp))
   * [8. Extension Explanation](#8-extension-explanation)
-    * [8.1 Click tracking for publisher](#81-click-tracking-for-publisher)
-      * [8.1.1 Unescaped request sample](#811-unescaped-request-sample)
-      * [8.1.2 Unescaped response sample](#812-unescaped-response-sample)
-      * [8.1.3 Escaped request sample](#813-escaped-request-sample)
-      * [8.1.4 Escaped response sample](#814-escaped-response-sample)
+    * [8.1 Click tracking for publisher](#81-Click-tracking-for-publisher)
+      * [8.1.1 click_tracking_url](#811-click_tracking_url)
+      * [8.1.2 click_through_url](#812-click_through_url)
+      * [8.1.3 request sample](#813-request-sample)
+      * [8.1.4 response sample - click_through_url](#814-response-sample---click_through_url)
+      * [8.1.5 response sample - click_tracking_url](815-response-sample---click_tracking_url)
 
 ### 1. Introduction
 
@@ -67,6 +68,63 @@ ExelBid RTB Integration Guide
 ExelBid(Excellent Bid) is an OpenRTB protocol–based advertisement auction system operating between Demand-Side Providers (DSP) and Supply-Side Providers (SSP). ExelBid currently supports OpenRTB 2.3 and OpenRTB Native-Ads-Specification 1.0. However, we do not fully support the Object from the spec but is limited to our definition in this document.
 
 #### 1.2 Integration Process
+<table>
+  <tr>
+    <th>순서</th>
+    <th>Action</th>
+    <th>PIC</th>
+  </tr>
+  <tr>
+    <td>00</td>
+    <td>Partnership Inquiry</td>
+    <td>DSP</td>
+  </tr>
+  <tr>
+    <td>01</td>
+    <td>Send Exelbid integration guideline & DSP questionnaire</td>
+    <td>Exelbid</td>
+  </tr>
+  <tr>
+    <td>02</td>
+    <td>the integration guideline and fill out the questionnaire</td>
+    <td>DSP</td>
+  </tr>
+  <tr>
+    <td>03</td>
+    <td>Review the questionnaire prior to signing a contract</td>
+    <td>Exelbid</td>
+  </tr>
+  <tr>
+    <td>04</td>
+    <td>Return the signed contract with an EndPoint, a response example and anything required for a test</td>
+    <td>DSP</td>
+  </tr>
+  <tr>
+    <td>05</td>
+    <td>Review the response example</td>
+    <td>Exelbid</td>
+  </tr>
+  <tr>
+    <td>06</td>
+    <td>Start a test</td>
+    <td>Exelbid</td>
+  </tr>
+  <tr>
+    <td>07</td>
+    <td>Monitor data</td>
+    <td>Exelbid, DSP</td>
+  </tr>
+  <tr>
+    <td>08</td>
+    <td>Compare the numbers and end the test</td>
+    <td>Exelbid, DSP</td>
+  </tr>
+  <tr>
+    <td>09</td>
+    <td>Start trading</td>
+    <td>Exelbid, DSP</td>
+  </tr>
+</table>
 
 #### 1.3 ExelBid History
 - 2017-06-23 - Add optouturl to Bid Response bid-ext, and implement 4.2.5 Opt-out setting guide (※Korea Communication Commission – Customized online ad privacy protection guide)
@@ -1211,8 +1269,17 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 
 ### 8 Extension Explanation
 #### 8.1 Click tracking for publisher
-  In Exelbid, publishers provide markup to Imp Object Extension (Imp.ext.click_through_url) to measure clicks. <br>
-  DSP should make new click URL using click_through_url.
+Exelbid has two Imp Object Extensions: 'click_tracking_url' and 'click_through_url', in case a publisher requires click numbers (mostly web publishers).<br>
+When calling clicks, DSP should either call click_tracking_url on Exelbid or creat a new click url using click_through_url. 
+
+#### 8.1.1 click_tracking_url
+ Exelbid has an Imp Object Extension (imp.ext.click_tracking_url) to collect click numbers for publishers who require them.<br>
+ When calling clicks, DSP should call click_tracking_url on Exelbid. 
+
+#### 8.1.2 click_through_url
+Exelbid has an Imp Object Extension (Imp.ext.click_through_url) markup to collect click numbers for publishers who require them.<br>
+In this case, Exelbid replaces click_through_url markup ${CLICK_URL_ESC} to an encoded DSP click url then uses it as a click url<br>
+※ when a user clicks on an ad, Exelbid tracks click data before it leads to a landing page.
   <table>
   <tr>
     <th>Macup</th>
@@ -1224,14 +1291,9 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
     <td>string</td>
     <td>Escaped Click URL</td>
   </tr>
-  <tr>
-    <td>${CLICK_URL_UNESC}</td>
-    <td>string</td>
-    <td>Unescaped Click URL</td>
-  </tr>
   </table>
 
-##### 8.1.1 Unescaped request sample
+#### 8.1.3 request sample
 ```json
 {
   "imp": [
@@ -1243,14 +1305,16 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
       "instl": 0,
       "tagid": "072df02f86984dc6b50d74b0ad42bb85",
       "ext":{
-        "$click_through_url" : "${CLICK_URL_UNESC}"
+        "click_through_url" : "http://test.exelbid.com/click?id=100&redirect=${CLICK_URL_ESC}",
+        "click_tracking_url" : "http://test.exelbid.com/click?id=100"
       }
     }
   ]
 }
 ```
-##### 8.1.2 Unescaped response sample
-Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+#### 8.1.4 response sample - click_through_url
+Orignal click url : http://test.dsp.com/ad/click?id=57c52635e0012acf8c2a86e9 <br>
+Click url (click_through_url MarkUp replace): http://test.exelbid.com/click?id=100&redirect=http%3A%2F%2Ftest.dsp.com%2Fad%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9 
 ```json
 {
   "id": "57a06a911b3f68cd5cacdc46",
@@ -1262,7 +1326,7 @@ Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2
           "impid": "1",
           "price": 1,
           "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adm": "<a href=\"http://test.exelbid.com/click?id=100&redirect=http%3A%2F%2Ftest.dsp.com%2Fad%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
@@ -1283,27 +1347,8 @@ Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2
   "cur": "USD"
 }
 ```
-
-##### 8.1.3 Escaped request sample
-```json
-{
-  "imp": [
-    {
-      "bidfloor": 0.014,
-      "displaymanager": "test",
-      "displaymanagerver": "4.2.0",
-      "id": "1",
-      "instl": 0,
-      "tagid": "072df02f86984dc6b50d74b0ad42bb85",
-      "ext":{
-        "$click_through_url" : "http://test.exelbid.com/test?id=100&redirect=${CLICK_URL_ESC}"
-      }
-    }
-  ]
-}
-```
-##### 8.1.4 Escaped response sample
-Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2a86e9
+#### 8.5 response sample - click_tracking_url
+Orignal click url : http://test.dsp.com/ad/click?id=57c52635e0012acf8c2a86e9 <br>
 ```json
 {
   "id": "57a06a911b3f68cd5cacdc46",
@@ -1315,7 +1360,7 @@ Orignal click url : http://test.exelbid.com/exelbid/click?id=57c52635e0012acf8c2
           "impid": "1",
           "price": 1,
           "nurl":"http://test.exelbid.com/exelbid/nurl?id=57c52635e0012acf8c2a86e9&price=${AUCTION_PRICE}",
-          "adm": "<a href=\"http://test.exelbid.com/test?id=100&redirect=http%3A%2F%2Ftest.exelbid.com%2Fexelbid%2Fclick%3Fid%3D57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
+          "adm": "<a href=\"http://test.dsp.com/ad/click?id=57c52635e0012acf8c2a86e9\" target=\"_top\"><img style=\"width:320px;\" src=\"http://st-dev.onnuridmc.com/banner/201603/7dbe91ea14481e617850633c04a6883d.jpg\" alt=\"Advertisement\" /></a>",
           "adomain": [
             "onnuridmc.com"
           ],
