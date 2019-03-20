@@ -1,7 +1,7 @@
 ExelBid RTB 연동 가이드
 =======================
 
-  * [1. ExcelBid 소개](#1-excelbid-소개)
+  * [1. ExelBid 소개](#1-exelbid-소개)
     * [1.1 ExelBid RTB?](#11-exelbid-rtb)
     * [1.2 ExelBid 연동 절차](#12-exelbid-연동-절차)
     * [1.3 ExelBid History](#13-exelbid-history)
