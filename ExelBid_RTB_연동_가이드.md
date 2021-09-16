@@ -465,7 +465,7 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  cid     | string       | 필수         | 광고 캠페인 ID                                                                                                                                                                               
  crid    | string       | 필수         | 광고물 ID                                                                                                                                                                                    
  cat     | string array |              | 광고물의 컨텐츠 카테고리 목록. IAB OpenRTB Spec 2.3 > 표 5.1 참조                                                                                                                            
- attr    | string array |              | 광고물 속성. OpenRTB Spec 2.3 > 표 5.3 참조                                                                                                                                                  
+ attr    | integer array |              | 광고물 속성. OpenRTB Spec 2.3 > 표 5.3 참조                                                                                                                                                  
  w       | integer      |              | 광고물 넓이(pixel)                                                                                                                                                                           
  h       | integer      |              | 광고물 높이(pixel)                                                                                                                                                                           
  ext     | object       |              | 규격 표준을 벗어나는 OpenRTB 주체가 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다.<br>ExelBid에서는 주로 Native 응답에 사용한다.
