@@ -220,6 +220,7 @@ This object describes an ad placement or impression being auctioned.
   Name              | Type    | Required, Default    | Description                                                  
  :------------------|:--------|:----------------|:-------------------------------------------------------------
   click_through_url | string  |                 | Click URL. ${CLICK_URL_ESC} or {CLICK_URL_UNESC}
+  rewarded          | integer |  Default 0      | 1 = rewarded
 
 ##### 3.2.3 Object: Banner
 
