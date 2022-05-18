@@ -16,6 +16,7 @@ Publisher RTB 연동 가이드
     * [3.2 Object Specifications](#32-object-specifications)
       * [3.2.1 Object: BidRequest](#321-object-bidrequest)
       * [3.2.2 Object: Imp](#322-object-imp)
+        * [3.2.2.1 Object: Ext](#3221-object-ext)
       * [3.2.3 Object: Banner](#323-object-banner)
       * [3.2.4 Object: Video](#324-object-video)
       * [3.2.5 Object: Native](#325-object-native)
@@ -36,6 +37,7 @@ Publisher RTB 연동 가이드
       * [4.2.1 Object: BidResponse](#421-object-bidresponse)
       * [4.2.2 Object: SeatBid](#422-object-seatbid)
       * [4.2.3 Object: Bid](#423-object-bid)
+      * [4.2.4 Object: Ext](#424-object-ext)
     * [4.3 치환(Substitution Macros)](#43-치환substitution-macros)
   * [5. Native 규격](#5-native-규격)
     * [5.1 입찰 요청](#51-입찰-요청)
@@ -159,7 +161,15 @@ RTB 시작은 입찰 요청을 보내면서 시작됩니다. BidRequest는 하�
  tagid             | string  |                 | 노출 인벤토리(해당 지면, 유닛)의 고유한 식별자               
  bidfloor          | integer | 기본값 0        | Impression의 입찰 최저가                                     
  bidfloorcur       | string  | 기본값 "USD"    | ISO–4217 알파벳 코드를 사용하여 명시되어야 합니다            
- ext               | object  |                 | click_through_url 포함. 3.2.2.1 Object: Ext 참조   
+ ext               | object  |                 | click_callback_url 포함. 3.2.2.1 Object: Ext 참조   
+ 
+
+##### 3.2.2.1 Object: Ext
+
+  Name              | Type    | 필수, 기본값    | Description                                                  
+ :------------------|:--------|:----------------|:-------------------------------------------------------------
+  click_callback_url | string  |                 | Exelbid가 click 트리킹시 해당 click_callback_url을 호출
+  rewarded          | integer |  기본값 0       | 1 : 리워드
 
 ##### 3.2.3 Object: Banner
 
@@ -406,8 +416,14 @@ Device 오브젝트와 User 오브젝트 두 군데, 혹은 한 군데 모두 �
  attr    | string array |              | 광고물 속성. OpenRTB Spec 2.3 > 표 5.3 참조                                                                                                                                                  
  w       | integer      |              | 광고물 넓이(pixel)                                                                                                                                                                           
  h       | integer      |              | 광고물 높이(pixel)                                                                                                                                                                           
- ext     | object       |              | 규격 표준을 벗어나는 OpenRTB 주체가 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다.<br>ExelBid에서는 주로 Native 응답에 사용한다.
+ ext     | object       |              | 규격 표준을 벗어나는 OpenRTB 주체가 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다 동의한 경우 이 오브젝트로 규격의 유연성을 제공합니다.
+##### 4.2.4 Object: Ext
 
+Bid Object의 Ext. 네이티브 요청시의 응답객체, optouturl(광고 정보 표시 링크 URL)등이 포함 됩니다.
+
+  Name    | Type         | 필수, 기본값 | Description                                                                                                                                                                                  
+ :--------|:-------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                          
+  optouturl   | string       | 권장         | 맞춤형 광고일 경우의 opt-out 설정 url.
 
 
 #### 4.3 치환(Substitution Macros)
