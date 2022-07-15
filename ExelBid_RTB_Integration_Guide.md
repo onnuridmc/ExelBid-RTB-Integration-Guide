@@ -371,7 +371,37 @@ This object contains information known or derived about the human user of the de
  yob      | integer |              | Year of birth as a 4-digit integer                                                               
  gender   | string  |              | Gender, where “M” = male, “F” = female, “O” = known to be other.                                        
  keywords | string  |              | Comma separated list of keywords, interests, or intent.
- geo      | object  |              | Location of the user’s home base defined by a Geo object.                                                                       
+ geo      | object  |              | Location of the user’s home base defined by a Geo object.            
+ ext      | object  |              | Include eids. Section 3.2.12.1 Object: Ext
+ 
+##### 3.2.12.1 Object: Ext
+
+ Name | Type          | 필수, 기본값     | Description                                                  
+:-----|:--------------|:----------------|:-------------------------------------------------------------
+ eids | object array  |                 | Include source & uids. Section 3.2.12.2 Object: Eids
+
+##### 3.2.12.2 Object: Eids
+
+ Name   | Type          | 필수, 기본값             | Description                                                  
+:-------|:--------------|:------------------------|:-------------------------------------------------------------
+ source | string        | 기본값 "exelbid.com"     | Exelbid Url
+ uids   | object array  |                         | Include uids. Section 3.2.12.3 Object: Uids
+
+##### 3.2.12.3 Object: Uids
+
+ Name   | Type    | 필수, 기본값  | Description                                                  
+:-------|:--------|:-------------|:-------------------------------------------------------------
+ id     | string  |              | Identifier for the user
+ atype  | integer | 기본값 3      | Include Agent Type. Section 3.2.12.4 List:Agent Type
+
+##### 3.2.12.4 List:Agent Type
+
+ Value  | Description                                                  
+:-------|:-------------------------------------------------------------
+ 1      | Specific web browser (cookie-based,probabilistic, or other)
+ 2      | Device ID 
+ 3      | Person-based ID (email, phone ext..)
+ 500+   | Vendor-specific codes.                                                    
 
 ##### 3.2.13 Object: Data
 
