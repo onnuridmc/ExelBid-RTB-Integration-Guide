@@ -27,6 +27,10 @@ ExelBid RTB 연동 가이드
       * [3.2.10 Object: Device](#3210-object-device)
       * [3.2.11 Object: Geo](#3211-object-geo)
       * [3.2.12 Object: User](#3212-object-user)
+        * [3.2.12.1 Object: Ext](#32121-object-ext)
+        * [3.2.12.2 Object: Eids](#32122-object-eids)
+        * [3.2.12.3 Object: Uids](#32123-object-uids)
+        * [3.2.12.4 List:Agent Type](#32124-listagent-type)
       * [3.2.13 Object: Data](#3213-object-data)
       * [3.2.14 Object: Segment](#3214-object-segment)
       * [3.2.15 Object: Pmp](#3215-object-pmp)
@@ -600,7 +604,7 @@ ExelBid Native는 OpenRTB-Native-Ads-Specification 1.0을 기본으로 구성되
 </tr>
 <tr>
   <td rowspan="16">assets</td>
-  <td rowspan="16">array of objects; required</td>
+  <td rowspan="16">array of objects;required</td>
   <td>id</td>
   <td>integer; required</td>
   <td></td>
@@ -706,7 +710,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 </tr>
 <tr>
   <td rowspan="25">native</td>
-  <td rowspan="25">object; required</td>
+  <td rowspan="25">object;required</td>
   <td>ver</td>
   <td>integer; optional</td>
   <td></td>
@@ -716,7 +720,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 </tr>
 <tr>
   <td rowspan="17">assets</td>
-  <td rowspan="17">array of objects; required</td>
+  <td rowspan="17">array of objects;required</td>
   <td>id</td>
   <td>integer; required</td>
   <td></td>
