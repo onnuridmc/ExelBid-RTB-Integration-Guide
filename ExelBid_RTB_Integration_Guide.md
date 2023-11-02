@@ -1040,7 +1040,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
           6
         ],
         "request": "{\"native\":{\"assets\":[{\"id\":1,\"required\":1,\"title\":{\"len\":25}},{\"id\":2,\"img\":{\"hmin\":80,\"type\":1,\"wmin\":80},\"required\":1},{\"id\":3,\"img\":{\"h\":80,\"type\":2,\"w\":80},\"required\":0},{\"id\":4,\"img\":{\"h\":627,\"type\":3,\"w\":1200},\"required\":1},{\"id\":5,\"data\":{\"len\":100,\"type\":1},\"required\":0},{\"id\":6,\"data\":{\"len\":100,\"type\":2},\"required\":1},{\"id\":7,\"data\":{\"len\":100,\"type\":3},\"required\":0},{\"id\":8,\"data\":{\"len\":100,\"type\":4},\"required\":0},{\"id\":9,\"data\":{\"len\":100,\"type\":5},\"required\":0},{\"id\":10,\"data\":{\"len\":100,\"type\":6},\"required\":0},{\"id\":11,\"data\":{\"len\":100,\"type\":7},\"required\":0},{\"id\":12,\"data\":{\"len\":100,\"type\":8},\"required\":0},{\"id\":13,\"data\":{\"len\":100,\"type\":9},\"required\":0},{\"id\":14,\"data\":{\"len\":100,\"type\":10},\"required\":0},{\"id\":15,\"data\":{\"len\":100,\"type\":11},\"required\":0},{\"id\":16,\"data\":{\"len\":15,\"type\":12},\"required\":0}],\"layout\":6}}",
-        "ver": "1.0.0.2"
+        "ver": "1.0"
       },
       "tagid": "072df02f86984dc6b50d74b0ad42bb85"
     }
@@ -1205,7 +1205,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
           "w": 0,
           "ext": {
             "native": {
-              "ver": "1.0.0.2",
+              "ver": "1.0",
               "link": {
                 "url": "http://test.exelbid.com/exelbid/click?id=57c5468e0c5fb71f81bf6967"
               },
