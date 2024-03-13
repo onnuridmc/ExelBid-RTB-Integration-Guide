@@ -606,7 +606,7 @@ Bid Request Specification. Refer to OpenRTB-Native-Ads-Specification 1.0 for mor
 </tr>
 <tr>
   <td rowspan="16">assets</td>
-  <td rowspan="16">array of objects; required</td>
+  <td rowspan="16">array of objects;required</td>
   <td>id</td>
   <td>integer; required</td>
   <td></td>
@@ -712,7 +712,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 </tr>
 <tr>
   <td rowspan="25">native</td>
-  <td rowspan="25">object; required</td>
+  <td rowspan="25">object;required</td>
   <td>ver</td>
   <td>integer; optional</td>
   <td></td>
@@ -722,7 +722,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 </tr>
 <tr>
   <td rowspan="17">assets</td>
-  <td rowspan="17">array of objects; required</td>
+  <td rowspan="17">array of objects;required</td>
   <td>id</td>
   <td>integer; required</td>
   <td></td>
@@ -816,7 +816,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 </tr>
 <tr>
   <td>clicktrackers[]</td>
-  <td>array of strings; required</td>
+  <td>array of strings; optional</td>
   <td></td>
   <td></td>
 </tr>
