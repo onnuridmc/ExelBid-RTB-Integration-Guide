@@ -788,7 +788,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 </tr>
 <tr>
   <td>clicktrackers[]</td>
-  <td>array of strings; required</td>
+  <td>array of strings; optional</td>
 </tr>
 <tr>
   <td><strike>fallback</strike></td>
@@ -815,7 +815,7 @@ Exelbid에서는 두가지 입찰 옵션 규격을 제공합니다. 기본적으
 </tr>
 <tr>
   <td>clicktrackers[]</td>
-  <td>array of strings; required</td>
+  <td>array of strings; optional</td>
   <td></td>
   <td></td>
 </tr>
