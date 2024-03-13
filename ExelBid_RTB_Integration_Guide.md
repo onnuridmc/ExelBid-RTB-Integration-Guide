@@ -790,7 +790,7 @@ At ExelBid, we provide 2 bidding options. 1. Basically we insert serialized stri
 </tr>
 <tr>
   <td>clicktrackers[]</td>
-  <td>array of strings; required</td>
+  <td>array of strings; optional</td>
 </tr>
 <tr>
   <td><strike>fallback</strike></td>
